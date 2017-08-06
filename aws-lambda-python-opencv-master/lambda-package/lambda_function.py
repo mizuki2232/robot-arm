@@ -17,6 +17,6 @@ def lambda_handler(event, context):
 
     cv2.imwrite('/tmp/modified.jpg', img)
     data = open('/tmp/modified.jpg', 'rb')
-    s3.Bucket('bento-robot').put_object('girl_laugh_face_modifie.jpg', data)
+    s3.Bucket('bento-robot').put_object(Key ='girl_laugh_face_modifie.jpg', Body = data)
 
     return "It works!"
