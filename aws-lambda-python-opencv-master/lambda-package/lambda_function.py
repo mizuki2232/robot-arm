@@ -1,5 +1,3 @@
-import numpy as np
-
 import boto3
 import cv2
 
