@@ -39,6 +39,6 @@ chrpath -r '$ORIGIN' lambda-package/cv2/__init__.so
 touch lambda-package/cv2/__init__.py
 
 # Copy template function and zip package
-cp template.py lambda-package/lambda_function.py
+# cp template.py lambda-package/lambda_function.py
 cd lambda-package
 zip -r ../lambda-package.zip *
