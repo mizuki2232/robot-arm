@@ -1,0 +1,15 @@
+/usr/local/lib/python2.7/site-packages/pip/commands/install.py:194: UserWarning: Disabling all use of wheels due to the use of --build-options / --global-options / --install-options.
+  cmdoptions.check_install_build_global(options)
+fatal: destination path 'opencv' already exists and is not an empty directory.
+HEAD is now at 92387b1... Fix java version++
+CMake Warning at CMakeLists.txt:1250 (message):
+  The source directory is the same as binary directory.  "make clean" may
+  damage the source tree
+
+
+In file included from /home/ec2-user/develop/robot-arm/aws-lambda-python-opencv-master/lambda-package/numpy/core/include/numpy/ndarraytypes.h:4:0,
+                 from /home/ec2-user/develop/robot-arm/aws-lambda-python-opencv-master/lambda-package/numpy/core/include/numpy/ndarrayobject.h:18,
+                 from /home/ec2-user/develop/robot-arm/aws-lambda-python-opencv-master/build/opencv/modules/python/src2/cv2.cpp:10:
+/home/ec2-user/develop/robot-arm/aws-lambda-python-opencv-master/lambda-package/numpy/core/include/numpy/npy_common.h:17:5: warning: "NPY_INTERNAL_BUILD" is not defined [-Wundef]
+ #if NPY_INTERNAL_BUILD
+     ^
