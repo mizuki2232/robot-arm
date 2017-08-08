@@ -7,7 +7,7 @@ mkdir -p lambda-package/cv2 build/numpy
 
 # Build numpy
 pip install --install-option="--prefix=$PWD/build/numpy" numpy
-cp -rf build/numpy/lib64/python2.7/site-packages/numpy lambda-package
+cp -rf build/numpy/lib/python2.7/site-packages/numpy lambda-package
 
 # Build OpenCV 3.1
 (
@@ -27,14 +27,14 @@ cp -rf build/numpy/lib64/python2.7/site-packages/numpy lambda-package
 		-D ENABLE_SSE42=ON						\
 		-D ENABLE_POPCNT=ON						\
 		-D ENABLE_FAST_MATH=ON					\
-		-D BUILD_EXAMPLES=OFF					\
+		-D BUILD_EXAMPLES=ON					\
 		-D PYTHON2_NUMPY_INCLUDE_DIRS="$NUMPY"	\
 		.
 	make
 )
 cp build/opencv/lib/cv2.so lambda-package/cv2/__init__.so
 cp -L build/opencv/lib/*.so.3.1 lambda-package/cv2
-strip --strip-all lambda-package/cv2/*
+# strip --strip-all lambda-package/cv2/*
 chrpath -r '$ORIGIN' lambda-package/cv2/__init__.so
 touch lambda-package/cv2/__init__.py
 
