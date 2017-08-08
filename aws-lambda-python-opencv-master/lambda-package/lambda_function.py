@@ -6,7 +6,7 @@ s3 = boto3.resource('s3')
 
 
 def lambda_handler(event, context):
-    s3.Bucket('bento-robot').download_file('girl_laugh_face.jpg', '/tmp/test.jpg')
+    s3.Bucket('bucket_name).download_file('girl.jpg', '/tmp/test.jpg')
     face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 
     img = cv2.imread('/tmp/test.jpg')
@@ -17,6 +17,6 @@ def lambda_handler(event, context):
 
     cv2.imwrite('/tmp/modified.jpg', img)
     data = open('/tmp/modified.jpg', 'rb')
-    s3.Bucket('bento-robot').put_object(Key ='girl_laugh_face_modifie.jpg', Body = data)
+    s3.Bucket('bucket_name').put_object(Key ='girl_modified.jpg', Body = data)
 
     return "It works!"
