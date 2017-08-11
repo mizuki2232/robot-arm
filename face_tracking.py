@@ -21,19 +21,19 @@ PIN = 25
 GPIO.setup(PIN, GPIO.OUT)
 servo3 = GPIO.PWM(PIN, 50)
 
-
 PIN = 8
 GPIO.setup(PIN, GPIO.OUT)
 servo4 = GPIO.PWM(PIN, 50)
 
-val = [2.5,3.6875,4.875,6.0625,7.25,8.4375,9.625,10.8125,12]
+val = [2.5, 3.6875, 4.875, 6.0625, 7.25, 8.4375, 9.625, 10.8125, 12]
 
 
-capture_image = "capture.jpg"
+capture_image = "capture.png"
 bucket_name = "bento_robot"
 s3 = boto3.resource('s3')
 sqs = boto3.resource('sqs')
 queue_name = 'robot_arm'
+
 try:
     queue = sqs.get_queue_by_name(QueueName=queue_name)
 except:
