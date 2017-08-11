@@ -28,7 +28,7 @@ servo4 = GPIO.PWM(PIN, 50)
 val = [2.5, 3.6875, 4.875, 6.0625, 7.25, 8.4375, 9.625, 10.8125, 12]
 
 
-capture_image = "capture.png"
+capture_image = "capture.jpg"
 bucket_name = "bento_robot"
 s3 = boto3.resource('s3')
 sqs = boto3.resource('sqs')
@@ -46,10 +46,10 @@ class Worker:
         print "take picture..."
         c = cv2.VideoCapture(0)
         r, img = c.read()
-        cv2.imwrite('./' + capture_image, img)
+        cv2.imwrite('/tmp/' + capture_image, img)
         c.release()
         print "uploading to S3..."
-        s3.Bucket(bucket_name).upload_file('./' + capture_image, capture_image)
+        s3.Bucket(bucket_name).upload_file('/tmp/' + capture_image, capture_image)
 
     def get_order(self):
         """Get Amazon SQS Message"""
