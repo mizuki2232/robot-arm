@@ -29,9 +29,6 @@ def lambda_handler(event, context):
     order = "order="
 
     try:
-        # check face in image (OpenCV doesn't arise any error even if face not in image,So should be check cv2.rectangle will work or not.)
-        print faces[x]
-
         for (x, y, w, h) in faces:
             # cv2.rectangle(image,(top-left point),(bottom-right point),(color),bold line)
             cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
