@@ -29,7 +29,7 @@ val = [2.5, 3.6875, 4.875, 6.0625, 7.25, 8.4375, 9.625, 10.8125, 12]
 
 
 capture_image = "capture.jpg"
-bucket_name = "bento_robot"
+bucket_name = "bento-robot"
 s3 = boto3.resource('s3')
 sqs = boto3.resource('sqs')
 queue_name = 'robot_arm'
@@ -55,7 +55,7 @@ class Worker:
         """Get Amazon SQS Message"""
         try:
             order = queue.receive_message()
-            print order
+            print "order: " + order
         except:
             pass
 
@@ -66,6 +66,7 @@ class Worker:
 
     def control_servo(self):
         """Control Servo it subject to Amazon SQS orders"""
+        print "Servo Motor Turn On."
         servo1.start(0.0)
         servo2.start(0.0)
         servo3.start(0.0)
@@ -79,7 +80,6 @@ class Worker:
             servo4.ChangeDutyCycle(val[0])
         if get_order.order in "turn top":
             servo4.ChangeDutyCycle(val[8])
-
 
 
 while True:
