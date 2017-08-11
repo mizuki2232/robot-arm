@@ -89,7 +89,7 @@ class Worker:
                         'Id':'1',
                         'ReceiptHandle': message[0].receipt_handle
                     },
-                ]    
+                ]
             )
             print ""
             print "======delete queue======"
