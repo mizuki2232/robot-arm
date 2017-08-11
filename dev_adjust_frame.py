@@ -11,7 +11,7 @@ capture_image = "capture.jpg"
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 img = cv2.imread('/tmp/' + capture_image)
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-faces = facecascade.detectMultiScale(gray, 1.3, 5)
+faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
 height = img.shape[0]
 width = img.shape[1]
