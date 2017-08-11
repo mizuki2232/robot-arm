@@ -5,7 +5,7 @@ import cv2
 s3 = boto3.resource('s3')
 sqs = boto3.resource('sqs')
 queue_name = 'robot_arm'
-image_file = 'capture.png'
+image_file = 'capture.jpg'
 
 try:
     queue = sqs.get_queue_by_name(QueueName=queue_name)
