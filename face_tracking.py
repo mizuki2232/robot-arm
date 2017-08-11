@@ -81,7 +81,6 @@ class Worker:
             servo4.ChangeDutyCycle(val[8])
 
 
-
 while True:
     Worker().upload_image()
     time.sleep(1)
