@@ -3,10 +3,10 @@ import sys
 
 
 capture_image = "capture.jpg"
-# c = cv2.VideoCapture(0)
-# r, img = c.read()
-# cv2.imwrite('/tmp/' + capture_image, img)
-# c.release()
+c = cv2.VideoCapture(0)
+r, img = c.read()
+cv2.imwrite('/tmp/' + capture_image, img)
+c.release()
 
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 img = cv2.imread('/tmp/' + capture_image)
@@ -23,6 +23,6 @@ frame_bottom = height - height/4
 
 for (x, y, w, h) in faces:
     cv2.rectangle(img, (x,y), (x + w, y + h), (255, 0, 0), 2)
-    cv2.rectangle(img, (frame_top, frame_left), (frame_bottom, frame_right), (255, 255, 0), 3)
+    cv2.rectangle(img, (frame_left, frame_top), (frame_right, frame_bottom), (255, 255, 0), 3)
 
-cv2.imshow('img', img)
+cv2.imwrite('./' + capture_image, img)
