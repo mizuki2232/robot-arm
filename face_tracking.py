@@ -149,10 +149,11 @@ class Worker:
         print ""
 
 
-while True:
-    Worker().upload_image()
-    time.sleep(1)
-    if Worker().get_order() == True:
-        Worker().control_servo()
-    else:
-        continue
+if __name__ == "__main__":
+    while True:
+        Worker().upload_image()
+        time.sleep(1)
+        if Worker().get_order() == True:
+            Worker().control_servo()
+        else:
+            continue
