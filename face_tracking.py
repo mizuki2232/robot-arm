@@ -40,8 +40,8 @@ except:
     queue = sqs.create_queue(QueueName=queue_name)
 
 
-class worker():
-    def upload_image():
+class Worker:
+    def upload_image(self):
         """Capture image, then upload image to Amazon s3."""
         print "take picture..."
         c = cv2.VideoCapture(0)
@@ -51,14 +51,20 @@ class worker():
         print "uploading to S3..."
         s3.Bucket(bucket_name).upload_file('./' + capture_image, capture_image)
 
-    def get_order():
+    def get_order(self):
         """Get Amazon SQS Message"""
-        if order = queue.receive_message() == True:
+        order = False
+        try:
+            order = queue.receive_message()
+        except:
+            pass
+
+        if order == True:
             return True
         else:
             return False
 
-    def control_servo():
+    def control_servo(self):
         """Control Servo it subject to Amazon SQS orders"""
         servo1.start(0.0)
         servo2.start(0.0)
@@ -75,9 +81,11 @@ class worker():
             servo4.ChangeDutyCycle(val[8])
 
 
+
 while True:
-    worker.upload_image()
-    while True:
-        if worker.get_order() == True:
-            worker.control_servo()
-            break;
+    Worker().upload_image()
+    time.sleep(1)
+    if Worker().get_order() == True:
+        Worker().control_servo()
+    else:
+        continue
