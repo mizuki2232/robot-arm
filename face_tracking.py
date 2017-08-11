@@ -52,10 +52,11 @@ class Worker:
         s3.Bucket(bucket_name).upload_file('/tmp/' + capture_image, capture_image)
 
     def get_order(self):
-        """Get Amazon SQS Message"""
+        """Get Amazon SQS Message."""
         order = False
         try:
             order = queue.receive_message()
+            print "Receive Queue Message"
         except:
             pass
 
@@ -66,6 +67,7 @@ class Worker:
 
     def control_servo(self):
         """Control Servo it subject to Amazon SQS orders"""
+        print "Servo Motor Turn On."
         servo1.start(0.0)
         servo2.start(0.0)
         servo3.start(0.0)
