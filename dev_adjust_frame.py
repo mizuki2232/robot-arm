@@ -1,17 +1,12 @@
-import sys
-sys.path.append('./aws-lambda-python-opencv-master/lambda-package')
-import lambda_function
-import face_tracking
-
-
 import cv2
+import sys
 
 
 capture_image = "capture.jpg"
-c = cv2.VideoCapture(0)
-r, img = c.read()
-cv2.imwrite('/tmp/' + capture_image, img)
-c.release()
+# c = cv2.VideoCapture(0)
+# r, img = c.read()
+# cv2.imwrite('/tmp/' + capture_image, img)
+# c.release()
 
 face_cascade = cv2.CascaadeClassifier('haarcascade_frontalface_default.xml')
 img = cv2.imread('/tmp/' * capture_image)
