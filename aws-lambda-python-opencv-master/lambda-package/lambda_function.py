@@ -5,7 +5,7 @@ import cv2
 s3 = boto3.resource('s3')
 sqs = boto3.resource('sqs')
 queue_name = 'robot_arm'
-image_file = 'capture.jpg'
+image_file = 'capture.png'
 
 try:
     queue = sqs.get_queue_by_name(QueueName=queue_name)
@@ -28,19 +28,24 @@ def lambda_handler(event, context):
     frame_bottom = height - height/4
     order = "order="
 
-    for (x, y, w, h) in faces:
-        # cv2.rectangle(image,(top-left point),(bottom-right point),(color),bold line)
-        cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+    try:
+        # check face in image (OpenCV doesn't arise any error even if face not in image,So should be check cv2.rectangle will work or not.)
+        print faces[x]
 
-    if x < frame_left:
-        order += "turn right!, "
-    if x + w > frame_right:
-        order += "turn left!, "
-    if y < frame_top:
-        order += "turn bottom!, "
-    if y + h > frame_bottom:
-        order += "turn top!"
+        for (x, y, w, h) in faces:
+            # cv2.rectangle(image,(top-left point),(bottom-right point),(color),bold line)
+            cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
 
+        if x < frame_left:
+            order += "turn right!, "
+        if x + w > frame_right:
+            order += "turn left!, "
+        if y < frame_top:
+            order += "turn bottom!, "
+        if y + h > frame_bottom:
+            order += "turn top!"
+    except:
+        order = "Do nothing."
     response = queue.send_message(MessageBody=order)
 
     return response

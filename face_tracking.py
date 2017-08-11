@@ -53,9 +53,9 @@ class Worker:
 
     def get_order(self):
         """Get Amazon SQS Message"""
-        order = False
         try:
             order = queue.receive_message()
+            print order
         except:
             pass
 
