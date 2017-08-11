@@ -41,45 +41,112 @@ except:
 
 
 class Worker:
+    order = ''
+
     def upload_image(self):
         """Capture image, then upload image to Amazon s3."""
-        print "take picture..."
+        print ""
+        print "=====Upload Process Start. ====="
+        print ""
+        print "Take Picture..."
         c = cv2.VideoCapture(0)
         r, img = c.read()
         cv2.imwrite('/tmp/' + capture_image, img)
         c.release()
-        print "uploading to S3..."
+        print ""
+        print ""
+        print "Upload Image To S3."
         s3.Bucket(bucket_name).upload_file('/tmp/' + capture_image, capture_image)
+        print "======Upload Process Ended.======"
 
     def get_order(self):
         """Get Amazon SQS Message"""
+        print ""
+        print "=====Get Queue Process Start. ====="
+        print ""
         try:
-            order = queue.receive_message()
-            print "order: " + order
-        except:
-            pass
+            message = queue.receive_messages(
+                AttributeNames=[
+                    'All'
+                ],
+                MessageAttributeNames=[
+                    'string',
+                ],
+                WaitTimeSeconds=20,
+                MaxNumberOfMessages=1
+            )
 
-        if order == True:
+            Worker.order = message[0].body
+
+            print ""
+            print "======order======"
+            print Worker.order
+            print "======order======"
+            print ""
+            response = queue.delete_messages(
+                Entries=[
+                    {
+                        'Id':'1',
+                        'ReceiptHandle': message[0].receipt_handle
+                    },
+                ]    
+            )
+            print ""
+            print "======delete queue======"
+            print response
+            print "======delete queue======"
+            print ""
+        except:
+            Worker.order = False
+            print ""
+            print "======order======"
+            print "None"
+            print "======order======"
+            print ""
+
+        print ""
+        print "======Get Queue Process Ended.======"
+        print ""
+
+        if Worker.order:
             return True
         else:
             return False
 
     def control_servo(self):
         """Control Servo it subject to Amazon SQS orders"""
-        print "Servo Motor Turn On."
+        print ""
+        print "=====Control Servo Process Start.====="
+        print ""
         servo1.start(0.0)
         servo2.start(0.0)
         servo3.start(0.0)
         servo4.start(0.0)
 
-        if get_order.order in "turn right":
-            servo1.ChangeDutyCycle(val[0])
-        if get_order.order in "turn left":
-            servo1.ChangeDutyCycle(val[8])
-        if get_order.order in "turn bottom":
-            servo4.ChangeDutyCycle(val[0])
-        if get_order.order in "turn top":
-            servo4.ChangeDutyCycle(val[8])
+        try:
+            if Worker.order in "turn right":
+                print "turn right."
+                servo1.ChangeDutyCycle(val[0])
+            if Worker.order in "turn left":
+                print "turn left."
+                servo1.ChangeDutyCycle(val[8])
+            if Worker.order in "turn bottom":
+                print "turn bottom."
+                servo4.ChangeDutyCycle(val[0])
+            if Worker.order in "turn top":
+                print "turn top."
+                servo4.ChangeDutyCycle(val[8])
+        except:
+            print "Something error occuered."
+
+        print ""
+        print "=====Servo Motor Turn Off.====="
+        print ""
+        print ""
+        print "=====Control Servo Process Ended.====="
+        print ""
+        print "Go Back to The Loop Top"
+        print ""
 
 
 while True:

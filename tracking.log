@@ -1,0 +1,102 @@
+
+=====Upload Process Start. =====
+
+Take Picture...
+
+
+Upload Image To S3.
+======Upload Process Ended.======
+
+=====Get Queue Process Start. =====
+
+
+======order======
+Do nothing.
+======order======
+
+
+======delete queue======
+{u'Successful': [{u'Id': '1'}], 'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200, 'RequestId': '1d416d69-bc38-5c4f-afdd-3f6e216d6931', 'HTTPHeaders': {'x-amzn-requestid': '1d416d69-bc38-5c4f-afdd-3f6e216d6931', 'content-length': '351', 'server': 'Server', 'connection': 'keep-alive', 'date': 'Fri, 11 Aug 2017 11:55:01 GMT', 'content-type': 'text/xml'}}}
+======delete queue======
+
+
+======Get Queue Process Ended.======
+
+
+=====Control Servo Process Start.=====
+
+
+=====Get Queue Process Start. =====
+
+
+======order======
+None
+======order======
+
+
+======Get Queue Process Ended.======
+
+Something error occuered.
+
+=====Servo Motor Turn Off.=====
+
+
+=====Control Servo Process Ended.=====
+
+Go Back to The Loop Top
+
+
+=====Upload Process Start. =====
+
+Take Picture...
+
+
+Upload Image To S3.
+======Upload Process Ended.======
+
+=====Get Queue Process Start. =====
+
+
+======order======
+Do nothing.
+======order======
+
+
+======delete queue======
+{u'Successful': [{u'Id': '1'}], 'ResponseMetadata': {'RetryAttempts': 0, 'HTTPStatusCode': 200, 'RequestId': 'c03a2809-774a-5b90-8851-7a0eea26aeee', 'HTTPHeaders': {'x-amzn-requestid': 'c03a2809-774a-5b90-8851-7a0eea26aeee', 'content-length': '351', 'server': 'Server', 'connection': 'keep-alive', 'date': 'Fri, 11 Aug 2017 11:55:24 GMT', 'content-type': 'text/xml'}}}
+======delete queue======
+
+
+======Get Queue Process Ended.======
+
+
+=====Control Servo Process Start.=====
+
+
+=====Get Queue Process Start. =====
+
+
+======order======
+None
+======order======
+
+
+======Get Queue Process Ended.======
+
+Something error occuered.
+
+=====Servo Motor Turn Off.=====
+
+
+=====Control Servo Process Ended.=====
+
+Go Back to The Loop Top
+
+
+=====Upload Process Start. =====
+
+Take Picture...
+
+
+Upload Image To S3.
+======Upload Process Ended.======
