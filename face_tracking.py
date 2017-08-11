@@ -124,18 +124,18 @@ class Worker:
         servo4.start(0.0)
 
         try:
-            if Worker.order in "turn right":
+            if "turn right" in Worker.order:
                 print "turn right."
-                servo1.ChangeDutyCycle(val[0])
-            if Worker.order in "turn left":
+                servo1.ChangeDutyCycle(val[3])
+            if "turn left" in Worker.order:
                 print "turn left."
-                servo1.ChangeDutyCycle(val[8])
-            if Worker.order in "turn bottom":
+                servo1.ChangeDutyCycle(val[5])
+            if "turn bottom" in Worker.order:
                 print "turn bottom."
-                servo4.ChangeDutyCycle(val[0])
-            if Worker.order in "turn top":
+                servo4.ChangeDutyCycle(val[3])
+            if  "turn top" in Worker.order:
                 print "turn top."
-                servo4.ChangeDutyCycle(val[8])
+                servo4.ChangeDutyCycle(val[5])
         except:
             print "Something error occuered."
 
