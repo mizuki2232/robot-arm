@@ -5,6 +5,7 @@ import cv2
 s3 = boto3.resource('s3')
 sqs = boto3.resource('sqs')
 queue_name = 'robot_arm'
+image_file = 'capture.png'
 
 try:
     queue = sqs.get_queue_by_name(QueueName=queue_name)
@@ -13,9 +14,9 @@ except:
 
 
 def lambda_handler(event, context):
-    s3.Bucket('bento-robot').download_file('capture.jpg', '/tmp/capture.jpg')
+    s3.Bucket('bento-robot').download_file(image_file, '/tmp/' + image_file)
     face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
-    img = cv2.imread('/tmp/capture.jpg')
+    img = cv2.imread('/tmp/' + image_file)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
 
