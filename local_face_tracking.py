@@ -1,8 +1,5 @@
 import time
-import sys
 
-
-import boto3
 import cv2
 import RPi.GPIO as GPIO
 
@@ -29,15 +26,6 @@ val = [2.5, 3.6875, 4.875, 6.0625, 7.25, 8.4375, 9.625, 10.8125, 12]
 
 
 capture_image = "capture.jpg"
-bucket_name = "bento-robot"
-s3 = boto3.resource('s3')
-sqs = boto3.resource('sqs')
-queue_name = 'robot_arm'
-
-try:
-    queue = sqs.get_queue_by_name(QueueName=queue_name)
-except:
-    queue = sqs.create_queue(QueueName=queue_name)
 
 
 class Worker:
@@ -56,7 +44,6 @@ class Worker:
         print "======Capture Process Ended.======"
 
     def make_order(self):
-        """Get Amazon SQS Message"""
         print ""
         print "=====Make Order Process Start. ====="
         print ""
@@ -64,7 +51,7 @@ class Worker:
         img = cv2.imread('/tmp/' + capture_image)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         faces = face_cascade.detectMultiScale(gray, 1.3, 5)
-    
+
         height = img.shape[0]
         width = img.shape[1]
         frame_top = height/4
@@ -72,12 +59,12 @@ class Worker:
         frame_right = width - width/4
         frame_bottom = height - height/4
         order = "order="
-    
+
         try:
             for (x, y, w, h) in faces:
                 # cv2.rectangle(image,(top-left point),(bottom-right point),(color),bold line)
                 cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
-    
+
             if x < frame_left:
                 order += "turn right!, "
             if x + w > frame_right:
@@ -91,16 +78,14 @@ class Worker:
 
         print ""
         print "=====order====="
-        print order 
+        print order
         print "=====order====="
         print ""
         print "======Make Order Process Ended.======"
         print ""
 
-        if Worker.order:
+        if "turn" in order:
             return True
-        else:
-            return False
 
     def control_servo(self):
         """Control Servo it subject to Amazon SQS orders"""
@@ -141,7 +126,7 @@ class Worker:
 if __name__ == "__main__":
     while True:
         Worker().capture_image()
-        if Worker().make_order() == True:
+        if Worker().make_order() is True:
             Worker().control_servo()
         else:
             continue
