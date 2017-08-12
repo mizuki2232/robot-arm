@@ -43,10 +43,8 @@ except:
 class Worker:
     order = ''
 
-    def upload_image(self):
-        """Capture image, then upload image to Amazon s3."""
-        print ""
-        print "=====Upload Process Start. ====="
+    def capture_image(self):
+        print "=====Capture Process Start. ====="
         print ""
         print "Take Picture..."
         c = cv2.VideoCapture(0)
@@ -55,57 +53,48 @@ class Worker:
         c.release()
         print ""
         print ""
-        print "Upload Image To S3."
-        s3.Bucket(bucket_name).upload_file('/tmp/' + capture_image, capture_image)
-        print "======Upload Process Ended.======"
+        print "======Capture Process Ended.======"
 
-    def get_order(self):
+    def make_order(self):
         """Get Amazon SQS Message"""
         print ""
-        print "=====Get Queue Process Start. ====="
+        print "=====Make Order Process Start. ====="
         print ""
+        face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+        img = cv2.imread('/tmp/' + capture_image)
+        gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+    
+        height = img.shape[0]
+        width = img.shape[1]
+        frame_top = height/4
+        frame_left = width/4
+        frame_right = width - width/4
+        frame_bottom = height - height/4
+        order = "order="
+    
         try:
-            message = queue.receive_messages(
-                AttributeNames=[
-                    'All'
-                ],
-                MessageAttributeNames=[
-                    'string',
-                ],
-                WaitTimeSeconds=20,
-                MaxNumberOfMessages=1
-            )
-
-            Worker.order = message[0].body
-
-            print ""
-            print "======order======"
-            print Worker.order
-            print "======order======"
-            print ""
-            response = queue.delete_messages(
-                Entries=[
-                    {
-                        'Id':'1',
-                        'ReceiptHandle': message[0].receipt_handle
-                    },
-                ]
-            )
-            print ""
-            print "======delete queue======"
-            print response
-            print "======delete queue======"
-            print ""
+            for (x, y, w, h) in faces:
+                # cv2.rectangle(image,(top-left point),(bottom-right point),(color),bold line)
+                cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+    
+            if x < frame_left:
+                order += "turn right!, "
+            if x + w > frame_right:
+                order += "turn left!, "
+            if y < frame_top:
+                order += "turn bottom!, "
+            if y + h > frame_bottom:
+                order += "turn top!"
         except:
-            Worker.order = False
-            print ""
-            print "======order======"
-            print "None"
-            print "======order======"
-            print ""
+            order = "Do nothing."
 
         print ""
-        print "======Get Queue Process Ended.======"
+        print "=====order====="
+        print order 
+        print "=====order====="
+        print ""
+        print "======Make Order Process Ended.======"
         print ""
 
         if Worker.order:
@@ -151,8 +140,8 @@ class Worker:
 
 if __name__ == "__main__":
     while True:
-        Worker().upload_image()
-        if Worker().get_order() == True:
+        Worker().capture_image()
+        if Worker().make_order() == True:
             Worker().control_servo()
         else:
             continue
