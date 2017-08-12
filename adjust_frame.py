@@ -39,22 +39,20 @@ while True:
 
     if "turn top" in order:
         print "turn top"
-        flag = True
     if "turn right"in order:
         print "turn right"
-        flag = True
     if "turn left" in order:
         print "turn left"
-        flag = True
     if "turn bottom" in order:
         print "turn bottom"
+
+    if "turn" in order:
         flag = True
+        cv2.imwrite('./' + capture_image, img)
 
-    cv2.imwrite('./' + capture_image, img)
-
-    print "========================="
-    print order
-    print "========================="
+        print "========================="
+        print order
+        print "========================="
 
     if flag == True:
         break
