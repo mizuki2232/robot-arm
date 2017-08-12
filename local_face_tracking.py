@@ -1,5 +1,3 @@
-import time
-
 import cv2
 import RPi.GPIO as GPIO
 
@@ -32,21 +30,13 @@ class Worker:
     order = ''
 
     def capture_image(self):
-        print "=====Capture Process Start. ====="
-        print ""
         print "Take Picture..."
         c = cv2.VideoCapture(0)
         r, img = c.read()
         cv2.imwrite('/tmp/' + capture_image, img)
         c.release()
-        print ""
-        print ""
-        print "======Capture Process Ended.======"
 
     def make_order(self):
-        print ""
-        print "=====Make Order Process Start. ====="
-        print ""
         face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
         img = cv2.imread('/tmp/' + capture_image)
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -54,37 +44,31 @@ class Worker:
 
         height = img.shape[0]
         width = img.shape[1]
-        frame_top = height/4
-        frame_left = width/4
-        frame_right = width - width/4
-        frame_bottom = height - height/4
-        order = "order="
+        frame_top = height/3
+        frame_left = width/3
+        frame_right = width - width/3
+        frame_bottom = height - height/3
+        Worker.order = "order="
 
-        try:
-            for (x, y, w, h) in faces:
-                # cv2.rectangle(image,(top-left point),(bottom-right point),(color),bold line)
-                cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+        for (x, y, w, h) in faces:
+            # cv2.rectangle(image,(top-left point),(bottom-right point),(color),bold line)
+            cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
 
             if x < frame_left:
-                order += "turn right!, "
+                Worker.order += "turn right!, "
             if x + w > frame_right:
-                order += "turn left!, "
+                Worker.order += "turn left!, "
             if y < frame_top:
-                order += "turn bottom!, "
+                Worker.order += "turn bottom!, "
             if y + h > frame_bottom:
-                order += "turn top!"
-        except:
-            order = "Do nothing."
+                Worker.order += "turn top!"
 
         print ""
         print "=====order====="
-        print order
+        print Worker.order
         print "=====order====="
-        print ""
-        print "======Make Order Process Ended.======"
-        print ""
 
-        if "turn" in order:
+        if "turn" in Worker.order:
             return True
 
     def control_servo(self):
@@ -97,26 +81,19 @@ class Worker:
         servo3.start(0.0)
         servo4.start(0.0)
 
-        try:
-            if "turn right" in Worker.order:
-                print "turn right."
-                servo1.ChangeDutyCycle(val[3])
-            if "turn left" in Worker.order:
-                print "turn left."
-                servo1.ChangeDutyCycle(val[5])
-            if "turn bottom" in Worker.order:
-                print "turn bottom."
-                servo4.ChangeDutyCycle(val[3])
-            if  "turn top" in Worker.order:
-                print "turn top."
-                servo4.ChangeDutyCycle(val[5])
-        except:
-            print "Something error occuered."
+	if "turn right" in Worker.order:
+            print "turn right."
+            servo1.ChangeDutyCycle(val[3])
+        if "turn left" in Worker.order:
+            print "turn left."
+            servo1.ChangeDutyCycle(val[5])
+        if "turn bottom" in Worker.order:
+            print "turn bottom."
+            servo4.ChangeDutyCycle(val[3])
+        if  "turn top" in Worker.order:
+            print "turn top."
+            servo4.ChangeDutyCycle(val[5])
 
-        print ""
-        print "=====Servo Motor Turn Off.====="
-        print ""
-        print ""
         print "=====Control Servo Process Ended.====="
         print ""
         print "Go Back to The Loop Top"
