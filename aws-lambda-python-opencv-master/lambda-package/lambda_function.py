@@ -28,10 +28,9 @@ def lambda_handler(event, context):
     frame_bottom = height - height/4
     order = "order="
 
-    try:
-        for (x, y, w, h) in faces:
-            # cv2.rectangle(image,(top-left point),(bottom-right point),(color),bold line)
-            cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
+    for (x, y, w, h) in faces:
+        # cv2.rectangle(image,(top-left point),(bottom-right point),(color),bold line)
+        cv2.rectangle(img, (x, y), (x + w, y + h), (255, 0, 0), 2)
 
         if x < frame_left:
             order += "turn right!, "
@@ -41,8 +40,6 @@ def lambda_handler(event, context):
             order += "turn bottom!, "
         if y + h > frame_bottom:
             order += "turn top!"
-    except:
-        order = "Do nothing."
     response = queue.send_message(MessageBody=order)
 
     return response

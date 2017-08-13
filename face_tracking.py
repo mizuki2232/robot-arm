@@ -45,9 +45,6 @@ class Worker:
 
     def upload_image(self):
         """Capture image, then upload image to Amazon s3."""
-        print ""
-        print "=====Upload Process Start. ====="
-        print ""
         print "Take Picture..."
         c = cv2.VideoCapture(0)
         r, img = c.read()
@@ -57,12 +54,10 @@ class Worker:
         print ""
         print "Upload Image To S3."
         s3.Bucket(bucket_name).upload_file('/tmp/' + capture_image, capture_image)
-        print "======Upload Process Ended.======"
 
     def get_order(self):
         """Get Amazon SQS Message"""
         print ""
-        print "=====Get Queue Process Start. ====="
         print ""
         try:
             message = queue.receive_messages(
@@ -104,9 +99,6 @@ class Worker:
             print "======order======"
             print ""
 
-        print ""
-        print "======Get Queue Process Ended.======"
-        print ""
 
         if Worker.order:
             return True
