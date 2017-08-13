@@ -109,16 +109,16 @@ class Worker:
 
         for key, value in Worker.order.items():
 
-            if key = "turn_right":
+            if key == "turn_right":
                 print key, value
                 # servo1.ChangeDutyCycle(val[3])
-            if key = "turn_left":
+            if key == "turn_left":
                 print key, value
                 # servo1.ChangeDutyCycle(val[5])
-            if key = "turn_top":
+            if key == "turn_top":
                 print key, value
                 # servo4.ChangeDutyCycle(val[3])
-            if key = "turn_bottom":
+            if key == "turn_bottom":
                 print key, value
                 # servo4.ChangeDutyCycle(val[5])
 
