@@ -1,5 +1,6 @@
 import time
 import sys
+import json
 
 
 import boto3
@@ -56,7 +57,6 @@ class Worker:
     def get_order(self):
         """Get Amazon SQS Message"""
         print ""
-        print ""
         try:
             message = queue.receive_messages(
                 AttributeNames=[
@@ -65,7 +65,7 @@ class Worker:
                 MessageAttributeNames=[
                     'string',
                 ],
-                WaitTimeSeconds=20,
+                WaitTimeSeconds=2,
                 MaxNumberOfMessages=1
             )
 
@@ -106,8 +106,9 @@ class Worker:
         servo3.start(0.0)
         servo4.start(0.0)
 
+        order = json.loads(Worker.order)
 
-        for key, value in Worker.order.items():
+        for key, value in order.items():
 
             if key == "turn_right":
                 print key, value
