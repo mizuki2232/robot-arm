@@ -42,6 +42,7 @@ except:
 
 class Worker:
     order = ''
+    current_point = [6, 6]
 
     def upload_image(self):
         """Capture image, then upload image to Amazon s3."""
@@ -112,15 +113,19 @@ class Worker:
 
             if key == "turn_right":
                 print key, value
-                # servo1.ChangeDutyCycle(val[3])
+                current_point[0] = current_point[0] - value / 1000
+                # servo1.ChangeDutyCycle(val[current_point])
             if key == "turn_left":
                 print key, value
+                current_point[0] = current_point[0] - value / 1000
                 # servo1.ChangeDutyCycle(val[5])
             if key == "turn_top":
                 print key, value
+                current_point[1] = current_point[1] - value / 1000
                 # servo4.ChangeDutyCycle(val[3])
             if key == "turn_bottom":
                 print key, value
+                current_point[1] = current_point[1] - value / 1000
                 # servo4.ChangeDutyCycle(val[5])
 
         Worker.order = ''
