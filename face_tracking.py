@@ -27,7 +27,6 @@ servo4 = GPIO.PWM(PIN, 50)
 
 val = [2.5, 3.6875, 4.875, 6.0625, 7.25, 8.4375, 9.625, 10.8125, 12]
 
-
 capture_image = "capture.jpg"
 bucket_name = "bento-robot"
 s3 = boto3.resource('s3')
@@ -50,7 +49,6 @@ class Worker:
         r, img = c.read()
         cv2.imwrite('/tmp/' + capture_image, img)
         c.release()
-        print ""
         print ""
         print "Upload Image To S3."
         s3.Bucket(bucket_name).upload_file('/tmp/' + capture_image, capture_image)
@@ -86,14 +84,15 @@ class Worker:
                     },
                 ]
             )
+
         except:
             print "======order======"
             print "None"
             print "======order======"
 
 
-        if "turn" in Worker.order:
-            return True
+        if Worker.order:
+            return response
         else:
             return False
 
@@ -107,21 +106,21 @@ class Worker:
         servo3.start(0.0)
         servo4.start(0.0)
 
-        try:
-            if "turn right" in Worker.order:
-                print "turn right."
-                servo1.ChangeDutyCycle(val[3])
-            if "turn left" in Worker.order:
-                print "turn left."
-                servo1.ChangeDutyCycle(val[5])
-            if "turn bottom" in Worker.order:
-                print "turn bottom."
-                servo4.ChangeDutyCycle(val[3])
-            if  "turn top" in Worker.order:
-                print "turn top."
-                servo4.ChangeDutyCycle(val[5])
-        except:
-            print "Something error occuered."
+
+        for key, value in Worker.order.items():
+
+            if key = "turn_right":
+                print key, value
+                # servo1.ChangeDutyCycle(val[3])
+            if key = "turn_left":
+                print key, value
+                # servo1.ChangeDutyCycle(val[5])
+            if key = "turn_top":
+                print key, value
+                # servo4.ChangeDutyCycle(val[3])
+            if key = "turn_bottom":
+                print key, value
+                # servo4.ChangeDutyCycle(val[5])
 
         Worker.order = ''
 
@@ -135,7 +134,7 @@ class Worker:
 if __name__ == "__main__":
     while True:
         Worker().upload_image()
-        if Worker().get_order() == True:
+        if Worker().get_order():
             Worker().control_servo()
         else:
             continue
