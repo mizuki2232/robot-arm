@@ -93,7 +93,6 @@ class Worker:
 
 
         if "turn" in Worker.order:
-            Worker.order = ''
             return True
         else:
             return False
@@ -123,6 +122,8 @@ class Worker:
                 servo4.ChangeDutyCycle(val[5])
         except:
             print "Something error occuered."
+
+        Worker.order = ''
 
         print "=====Servo Motor Turn Off.====="
         print "=====Control Servo Process Ended.====="
