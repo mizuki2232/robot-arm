@@ -40,6 +40,9 @@ def lambda_handler(event, context):
             order += "turn bottom!, "
         if y + h > frame_bottom:
             order += "turn top!"
-    response = queue.send_message(MessageBody=order)
 
-    return response
+    if "turn" in order:    
+        response = queue.send_message(MessageBody=order)
+        return response
+    else:
+        return "Nothing to do."
