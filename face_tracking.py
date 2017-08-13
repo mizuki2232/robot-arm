@@ -86,21 +86,14 @@ class Worker:
                     },
                 ]
             )
-            print ""
-            print "======delete queue======"
-            print response
-            print "======delete queue======"
-            print ""
         except:
-            Worker.order = False
-            print ""
             print "======order======"
             print "None"
             print "======order======"
-            print ""
 
 
-        if Worker.order:
+        if "turn" in Worker.order:
+            Worker.order = ''
             return True
         else:
             return False
@@ -131,10 +124,7 @@ class Worker:
         except:
             print "Something error occuered."
 
-        print ""
         print "=====Servo Motor Turn Off.====="
-        print ""
-        print ""
         print "=====Control Servo Process Ended.====="
         print ""
         print "Go Back to The Loop Top"
