@@ -42,7 +42,7 @@ except:
 
 class Worker:
     order = ''
-    current_point = [6, 6]
+    current_point = [6, 2]
 
     def upload_image(self):
         """Capture image, then upload image to Amazon s3."""
@@ -113,31 +113,32 @@ class Worker:
 
             if key == "turn_right":
                 print key, value
-                current_point[0] = current_point[0] - value / 1000
-                if current_point[0] < 2.5 or current_point[0] > 12:
-                    current_point[0] = 6
-                servo1.ChangeDutyCycle(current_point[0])
+                Worker.current_point[0] = Worker.current_point[0] - value / 1000
+                if Worker.current_point[0] < 2.5 or Worker.current_point[0] > 12:
+                    Worker.current_point[0] = 6
+                servo1.ChangeDutyCycle(Worker.current_point[0])
             if key == "turn_left":
                 print key, value
-                current_point[0] = current_point[0] - value / 1000
-                if current_point[0] < 2.5 or current_point[0] > 12:
-                    current_point[0] = 6
-                servo1.ChangeDutyCycle(current_point[0])
+                Worker.current_point[0] = Worker.current_point[0] - value / 1000
+                if Worker.current_point[0] < 2.5 or Worker.current_point[0] > 12:
+                    Worker.current_point[0] = 6
+                servo1.ChangeDutyCycle(Worker.current_point[0])
             if key == "turn_top":
                 print key, value
-                current_point[1] = current_point[1] - value / 1000
-                if current_point[1] < 2.5 or current_point[1] > 12:
-                    current_point[1] = 6
-                servo4.ChangeDutyCycle(current_point[1])
+                Worker.current_point[1] = Worker.current_point[1] - value / 1000
+                if Worker.current_point[1] < 2.5 or Worker.current_point[1] > 12:
+                    Worker.current_point[1] = 6
+                servo4.ChangeDutyCycle(Worker.current_point[1])
             if key == "turn_bottom":
                 print key, value
-                current_point[1] = current_point[1] - value / 1000
-                if current_point[0] < 2.5 or current_point[0] > 12:
-                    current_point[0] = 6
-                servo4.ChangeDutyCycle(current_point[1])
+                Worker.current_point[1] = Worker.current_point[1] - value / 1000
+                if Worker.current_point[0] < 2.5 or Worker.current_point[0] > 12:
+                    Worker.current_point[0] = 6
+                servo4.ChangeDutyCycle(Worker.current_point[1])
 
         Worker.order = ''
-
+        print "Current point is"
+        print Worker.current_point[0], Worker.current_point[1]
         print "=====Servo Motor Turn Off.====="
         print "=====Control Servo Process Ended.====="
         print ""
