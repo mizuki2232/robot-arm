@@ -114,19 +114,27 @@ class Worker:
             if key == "turn_right":
                 print key, value
                 current_point[0] = current_point[0] - value / 1000
-                # servo1.ChangeDutyCycle(val[current_point])
+                if current_point[0] < 2.5 or current_point[0] > 12:
+                    current_point[0] = 6
+                servo1.ChangeDutyCycle(current_point[0])
             if key == "turn_left":
                 print key, value
                 current_point[0] = current_point[0] - value / 1000
-                # servo1.ChangeDutyCycle(val[5])
+                if current_point[0] < 2.5 or current_point[0] > 12:
+                    current_point[0] = 6
+                servo1.ChangeDutyCycle(current_point[0])
             if key == "turn_top":
                 print key, value
                 current_point[1] = current_point[1] - value / 1000
-                # servo4.ChangeDutyCycle(val[3])
+                if current_point[1] < 2.5 or current_point[1] > 12:
+                    current_point[1] = 6
+                servo4.ChangeDutyCycle(current_point[1])
             if key == "turn_bottom":
                 print key, value
                 current_point[1] = current_point[1] - value / 1000
-                # servo4.ChangeDutyCycle(val[5])
+                if current_point[0] < 2.5 or current_point[0] > 12:
+                    current_point[0] = 6
+                servo4.ChangeDutyCycle(current_point[1])
 
         Worker.order = ''
 
