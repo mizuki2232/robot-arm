@@ -72,7 +72,7 @@ class Worker:
             return True
 
     def control_servo(self):
-        """Control Servo it subject to Amazon SQS orders"""
+        """Control Servo it subject to orders"""
         print ""
         print "=====Control Servo Process Start.====="
         print ""
