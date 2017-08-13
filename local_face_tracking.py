@@ -103,6 +103,7 @@ class Worker:
 if __name__ == "__main__":
     while True:
         Worker().capture_image()
+        time.sleep(1)
         if Worker().make_order() is True:
             Worker().control_servo()
         else:
