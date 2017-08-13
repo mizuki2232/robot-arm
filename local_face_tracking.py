@@ -70,6 +70,7 @@ class Worker:
         print "=====order====="
 
         if "turn" in Worker.order:
+            Worker.order = ''
             return True
 
     def control_servo(self):
