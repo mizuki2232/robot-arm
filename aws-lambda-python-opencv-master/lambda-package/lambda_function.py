@@ -20,7 +20,7 @@ def lambda_handler(event, context):
     face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')
     img = cv2.imread('/tmp/' + image_file)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+    faces = face_cascade.detectMultiScale(gray, 1.3, 3)
 
     height = img.shape[0]
     width = img.shape[1]
