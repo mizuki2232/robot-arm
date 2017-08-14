@@ -17,7 +17,7 @@ except:
 
 def lambda_handler(event, context):
     s3.Bucket('bento-robot').download_file(image_file, '/tmp/' + image_file)
-    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+    face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_alt2.xml')
     img = cv2.imread('/tmp/' + image_file)
     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, 1.3, 5)
