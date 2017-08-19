@@ -33,7 +33,7 @@ while True:
         MessageAttributeNames=[
             'string',
         ],
-        WaitTimeSeconds=10,
+        WaitTimeSeconds=20,
         MaxNumberOfMessages=1
     )
 
