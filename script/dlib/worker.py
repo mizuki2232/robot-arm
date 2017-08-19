@@ -41,8 +41,8 @@ class Worker:
     order = ''
     current_point = [6, 2]
 
-    def publish_queue(self):
-        """Publish Queue"""
+    def upload_image(self):
+        """Upload Image To S3"""
         print "Take Picture..."
         c = cv2.VideoCapture(0)
         r, img = c.read()
@@ -50,7 +50,7 @@ class Worker:
         r = 300.0 / img.shape[1]
         dimension = (300, int(img.shape[0] * r))
         resized_img = cv2.resize(img, dimension, interpolation = cv2.INTER_AREA)
-        encode_param=[int(cv2.IMWRITE_JPEG_QUALITY),90]
+        encode_param = [int(cv2.IMWRITE_JPEG_QUALITY),90]
         result, img = cv2.imencode('.jpg', resized_img, encode_param)
         c.release()
         print ""
@@ -152,7 +152,7 @@ class Worker:
 
 if __name__ == "__main__":
     while True:
-        Worker().publish_queue()
+        Worker().upload_image()
         if Worker().get_order():
             Worker().control_servo()
         else:
