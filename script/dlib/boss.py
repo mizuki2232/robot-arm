@@ -37,13 +37,13 @@ try:
 except:
     print None
 
-encoded_img = message[0].body
-img = encoded_img.decode('base64')
-detector = dlib.get_frontal_face_detector()
-dets = detector(img, 1)
-
 try:
+    encoded_img = message[0].body
+    img = encoded_img.decode('base64')
+    detector = dlib.get_frontal_face_detector()
+    dets = detector(img, 1)
     print ("Number of faces detected: {}".format(len(dets)))
+
     for i, d in enumerate(dets):
         print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
             i, d.left(), d.top(), d.right(), d.bottom()))
