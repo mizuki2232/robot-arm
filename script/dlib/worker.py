@@ -1,6 +1,6 @@
+import base64
 import json
 import time
-import io
 
 import boto3
 import cv2
@@ -50,7 +50,10 @@ class Worker:
         print "Take Picture..."
         c = cv2.VideoCapture(0)
         r, img = c.read()
-        img_bin = io.BytesIO(img)
+        r = 200.0 / img.shape[1]
+        dimension = (200, int(img.shape[0] * r))
+        resized_img = cv2.resize(img, dimension, interpolation = cv2.INTER_AREA)
+        img_bin = base64.b64encode(resized_img)
         c.release()
         print ""
         print "Publish Queue"
@@ -61,14 +64,14 @@ class Worker:
         """Get Amazon SQS Message"""
         print ""
         try:
-            message = queue.receive_messages(
+            message = order_queue.receive_messages(
                 AttributeNames=[
                     'All'
                 ],
                 MessageAttributeNames=[
                     'string',
                 ],
-                WaitTimeSeconds=2,
+                WaitTimeSeconds=10,
                 MaxNumberOfMessages=1
             )
 
@@ -79,7 +82,7 @@ class Worker:
             print Worker.order
             print "======order======"
             print ""
-            response = queue.delete_messages(
+            response = order_queue.delete_messages(
                 Entries=[
                     {
                         'Id':'1',
