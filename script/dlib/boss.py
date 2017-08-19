@@ -37,9 +37,9 @@ while True:
         MaxNumberOfMessages=1
     )
 
-
-    encoded_img = message[0].body
-    img = encoded_img.decode('base64')
+    img_info = message[0].body
+    img = io.StringIO()
+    s3.Bucket('bento-robot').download_file(image_file, img)
     detector = dlib.get_frontal_face_detector()
     dets = detector(img, 1)
     print ("Number of faces detected: {}".format(len(dets)))
