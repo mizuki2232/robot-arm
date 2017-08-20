@@ -1,5 +1,6 @@
 import json
 import io
+from random import randint
 import time
 
 import boto3
@@ -132,13 +133,25 @@ class Worker:
                 Worker.current_point[1] = Worker.current_point[1] - value / float(100)
                 if Worker.current_point[1] < 2.5 or Worker.current_point[1] > 12:
                     Worker.current_point[1] = 2
-                servo1.ChangeDutyCycle(Worker.current_point[0])
+                dice = randint(1, 3)
+                if dice == 1:
+                    servo1.ChangeDutyCycle(Worker.current_point[0])
+                elif dice == 2:
+                    servo2.ChangeDutyCycle(Worker.current_point[0])
+                elif dice == 3:
+                    servo3.ChangeDutyCycle(Worker.current_point[0])
             if key == "turn_bottom":
                 print key, value
                 Worker.current_point[1] = Worker.current_point[1] - value / float(100)
                 if Worker.current_point[1] < 2.5 or Worker.current_point[1] > 12:
                     Worker.current_point[1] = 2
-                servo1.ChangeDutyCycle(Worker.current_point[1])
+                dice = randint(1, 3)
+                if dice == 1:
+                    servo1.ChangeDutyCycle(Worker.current_point[0])
+                elif dice == 2:
+                    servo2.ChangeDutyCycle(Worker.current_point[0])
+                elif dice == 3:
+                    servo3.ChangeDutyCycle(Worker.current_point[0])
 
         Worker.order = ''
         print "Current point is"
