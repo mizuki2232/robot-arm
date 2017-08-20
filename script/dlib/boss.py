@@ -1,6 +1,3 @@
-import base64
-import sys
-
 import boto3
 import dlib
 import json
@@ -25,7 +22,6 @@ except:
 
 while True:
 
-    
     message = image_queue.receive_messages(
         AttributeNames=[
             'All'
