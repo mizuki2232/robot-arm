@@ -87,6 +87,7 @@ while True:
         except:
             print None
     else:
+        print "Boss throw a dice!"
         dice = randint(1, 4)
         if dice == 1:
             order = {"turn_left" : randint(100, 1000)}
@@ -96,5 +97,6 @@ while True:
             order = {"turn_top" : randint(100, 1000)}
         elif dice == 4:
             order = {"turn_bottom" : randint(100, 1000)}
+        print order
         body = json.dumps(order)
         response = order_queue.send_message(MessageBody=body)
