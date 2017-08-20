@@ -93,6 +93,8 @@ while True:
                     order = {"turn_top" : radint(100, 1000)}
                 elif dice == 4:
                     order = {"turn_bottom" : radint(100, 1000)}
+                body = json.dumps(order)
+                response = order_queue.send_message(MessageBody=body)
 
         except:
             print None
