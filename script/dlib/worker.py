@@ -48,8 +48,8 @@ class Worker:
         c = cv2.VideoCapture(0)
         r, img = c.read()
         print "Image Processing..."
-        r = 300.0 / img.shape[1]
-        dimension = (300, int(img.shape[0] * r))
+        r = 500.0 / img.shape[1]
+        dimension = (500, int(img.shape[0] * r))
         resized_img = cv2.resize(img, dimension, interpolation = cv2.INTER_AREA)
         encode_param = [int(cv2.IMWRITE_JPEG_QUALITY),90]
         result, img = cv2.imencode('.jpg', resized_img, encode_param)
