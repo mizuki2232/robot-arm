@@ -25,7 +25,6 @@ except:
 
 while True:
 
-    
     message = image_queue.receive_messages(
         AttributeNames=[
             'All'
