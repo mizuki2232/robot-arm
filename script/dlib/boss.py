@@ -83,18 +83,18 @@ while True:
             if obj_center_x:
                 body = json.dumps(order)
                 response = order_queue.send_message(MessageBody=body)
-            else:
-                dice = randint(1, 4)
-                if dice == 1:
-                    order = {"turn_left" : radint(100, 1000)}
-                elif dice == 2:
-                    order = {"turn_right" : radint(100, 1000)}
-                elif dice == 3:
-                    order = {"turn_top" : radint(100, 1000)}
-                elif dice == 4:
-                    order = {"turn_bottom" : radint(100, 1000)}
-                body = json.dumps(order)
-                response = order_queue.send_message(MessageBody=body)
 
         except:
             print None
+    else:
+        dice = randint(1, 4)
+        if dice == 1:
+            order = {"turn_left" : radint(100, 1000)}
+        elif dice == 2:
+            order = {"turn_right" : radint(100, 1000)}
+        elif dice == 3:
+            order = {"turn_top" : radint(100, 1000)}
+        elif dice == 4:
+            order = {"turn_bottom" : radint(100, 1000)}
+        body = json.dumps(order)
+        response = order_queue.send_message(MessageBody=body)
