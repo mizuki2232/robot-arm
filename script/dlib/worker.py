@@ -117,25 +117,25 @@ class Worker:
 
             if key == "turn_right":
                 print key, value
-                Worker.current_point[0] = Worker.current_point[0] - value / float(1000)
+                Worker.current_point[0] = Worker.current_point[0] - value / float(100)
                 if Worker.current_point[0] < 2.5 or Worker.current_point[0] > 12:
                     Worker.current_point[0] = 6
                 servo4.ChangeDutyCycle(Worker.current_point[0])
             if key == "turn_left":
                 print key, value
-                Worker.current_point[0] = Worker.current_point[0] - value / float(1000)
+                Worker.current_point[0] = Worker.current_point[0] - value / float(100)
                 if Worker.current_point[0] < 2.5 or Worker.current_point[0] > 12:
                     Worker.current_point[0] = 6
                 servo4.ChangeDutyCycle(Worker.current_point[0])
             if key == "turn_top":
                 print key, value
-                Worker.current_point[1] = Worker.current_point[1] - value / float(1000)
+                Worker.current_point[1] = Worker.current_point[1] - value / float(100)
                 if Worker.current_point[1] < 2.5 or Worker.current_point[1] > 12:
                     Worker.current_point[1] = 2
                 servo1.ChangeDutyCycle(Worker.current_point[0])
             if key == "turn_bottom":
                 print key, value
-                Worker.current_point[1] = Worker.current_point[1] - value / float(1000)
+                Worker.current_point[1] = Worker.current_point[1] - value / float(100)
                 if Worker.current_point[1] < 2.5 or Worker.current_point[1] > 12:
                     Worker.current_point[1] = 2
                 servo1.ChangeDutyCycle(Worker.current_point[1])
@@ -143,7 +143,7 @@ class Worker:
         Worker.order = ''
         print "Current point is"
         print Worker.current_point[0], Worker.current_point[1]
-        time.sleep(1)
+        time.sleep(0.3)
         print "=====Servo Motor Turn Off.====="
         print "=====Control Servo Process Ended.====="
         print ""

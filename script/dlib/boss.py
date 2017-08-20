@@ -1,5 +1,6 @@
 import base64
 from io import BytesIO
+from random import randint
 import sys
 
 import boto3
@@ -54,32 +55,44 @@ while True:
     detector = dlib.get_frontal_face_detector()
     dets = detector(img, 1)
     print ("Number of faces detected: {}".format(len(dets)))
-    try:
-        for i, d in enumerate(dets):
-            print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
-                i, d.left(), d.top(), d.right(), d.bottom()))
-    
-            obj_center_x = d.left() + d.right() / 2
-            obj_center_y = d.top() + d.bottom() / 2
-        height = img.shape[0]
-        width = img.shape[1]
-        img_center_x = width / 2
-        img_center_y = height / 2
-    
-        x_distance = img_center_x - obj_center_x
-        y_distance = img_center_y - obj_center_y
-    
-        if x_distance > 0:
-            order = {"turn_left" : x_distance}
-        if x_distance < 0:
-            order = {"turn_right" : abs(x_distance)}
-        if y_distance > 0:
-            order = {"turn_top" : y_distance}
-        if y_distance > 0:
-            order = {"turn_bottom" : abs(y_distance)}
-    
-        if obj_center_x:
-            body = json.dumps(order)
-            response = order_queue.send_message(MessageBody=body)
-    except:
-        print None
+    if len(dets) > 0:
+        try:
+            for i, d in enumerate(dets):
+                print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
+                    i, d.left(), d.top(), d.right(), d.bottom()))
+
+                obj_center_x = d.left() + d.right() / 2
+                obj_center_y = d.top() + d.bottom() / 2
+            height = img.shape[0]
+            width = img.shape[1]
+            img_center_x = width / 2
+            img_center_y = height / 2
+
+            x_distance = img_center_x - obj_center_x
+            y_distance = img_center_y - obj_center_y
+
+            if x_distance > 0:
+                order = {"turn_left" : x_distance}
+            if x_distance < 0:
+                order = {"turn_right" : abs(x_distance)}
+            if y_distance > 0:
+                order = {"turn_top" : y_distance}
+            if y_distance > 0:
+                order = {"turn_bottom" : abs(y_distance)}
+
+            if obj_center_x:
+                body = json.dumps(order)
+                response = order_queue.send_message(MessageBody=body)
+            else:
+                dice = randint(1, 4)
+                if dice == 1:
+                    order = {"turn_left" : radint(100, 1000)}
+                elif dice == 2:
+                    order = {"turn_right" : radint(100, 1000)}
+                elif dice == 3:
+                    order = {"turn_top" : radint(100, 1000)}
+                elif dice == 4:
+                    order = {"turn_bottom" : radint(100, 1000)}
+
+        except:
+            print None
