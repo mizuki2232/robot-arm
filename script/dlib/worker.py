@@ -41,7 +41,7 @@ except:
 
 class Worker:
     order = ''
-    current_point = [6, 2]
+    current_point = [6, 6]
 
     def upload_image(self):
         """Upload Image To S3"""
@@ -135,7 +135,7 @@ class Worker:
                 Worker.current_point[1] = Worker.current_point[1] - value / float(1000)
                 if Worker.current_point[1] < 2.5 or Worker.current_point[1] > 12:
                     print "Activate safety mode"
-                    Worker.current_point[1] = 2
+                    Worker.current_point[1] = 6
                 print "Worker throw a dice!"
                 dice = randint(1, 3)
                 if dice == 1:
@@ -149,7 +149,7 @@ class Worker:
                 Worker.current_point[1] = Worker.current_point[1] - value / float(1000)
                 if Worker.current_point[1] < 2.5 or Worker.current_point[1] > 12:
                     print "Activate safety mode"
-                    Worker.current_point[1] = 2
+                    Worker.current_point[1] = 6
                 print "Worker throw a dice!"
                 dice = randint(1, 3)
                 if dice == 1:
