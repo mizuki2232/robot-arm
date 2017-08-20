@@ -1,4 +1,5 @@
 import base64
+from io import BytesIO
 import sys
 
 import boto3
@@ -10,7 +11,6 @@ from skimage import io
 s3 = boto3.resource('s3')
 sqs = boto3.resource('sqs')
 queue_name = 'robot_arm'
-image_file = 'capture.jpg'
 order = {}
 
 try:
@@ -38,8 +38,14 @@ while True:
     )
 
     img_info = message[0].body
-    img = io.StringIO()
-    s3.Bucket('bento-robot').download_file(image_file, img)
+    print img_info
+    forward = img_info.rfind('key')
+    backward = img_info.rfind('.jpg')
+    img_name = img_info[forward+6:backward+4]
+    print img_name
+    img = BytesIO()
+    s3.Bucket('bento-robot').download_fileobj(img_name, img)
+    img = io.imread(img)
     detector = dlib.get_frontal_face_detector()
     dets = detector(img, 1)
     print ("Number of faces detected: {}".format(len(dets)))
@@ -50,7 +56,6 @@ while True:
 
         obj_center_x = d.left() + d.right() / 2
         obj_center_y = d.top() + d.bottom() / 2
-
     height = img.shape[0]
     width = img.shape[1]
     img_center_x = width / 2
