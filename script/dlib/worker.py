@@ -1,4 +1,5 @@
 import json
+import io
 import time
 
 import boto3
@@ -55,8 +56,8 @@ class Worker:
         c.release()
         print ""
         print "Upload Image To S3"
-        s3.Bucket(bucket_name).upload_file(img, capture_image)
-        print response
+        img = io.BytesIO(img)  # wrap binary image for upload_fileobj
+        response = s3.Bucket(bucket_name).upload_fileobj(img, capture_image)
 
     def get_order(self):
         """Get Amazon SQS Message"""
