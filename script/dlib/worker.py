@@ -41,7 +41,7 @@ except:
 
 class Worker:
     order = ''
-    current_point = [6, 2]
+    current_point = [6, 6]
 
     def upload_image(self):
         """Upload Image To S3"""
@@ -118,45 +118,51 @@ class Worker:
 
             if key == "turn_right":
                 print key, value
-                Worker.current_point[0] = Worker.current_point[0] - value / float(100)
+                Worker.current_point[0] = Worker.current_point[0] - value / float(1000)
                 if Worker.current_point[0] < 2.5 or Worker.current_point[0] > 12:
+                    print "Activate safety mode"
                     Worker.current_point[0] = 6
                 servo4.ChangeDutyCycle(Worker.current_point[0])
             if key == "turn_left":
                 print key, value
-                Worker.current_point[0] = Worker.current_point[0] - value / float(100)
+                Worker.current_point[0] = Worker.current_point[0] - value / float(1000)
                 if Worker.current_point[0] < 2.5 or Worker.current_point[0] > 12:
+                    print "Activate safety mode"
                     Worker.current_point[0] = 6
                 servo4.ChangeDutyCycle(Worker.current_point[0])
             if key == "turn_top":
                 print key, value
-                Worker.current_point[1] = Worker.current_point[1] - value / float(100)
+                Worker.current_point[1] = Worker.current_point[1] - value / float(1000)
                 if Worker.current_point[1] < 2.5 or Worker.current_point[1] > 12:
-                    Worker.current_point[1] = 2
+                    print "Activate safety mode"
+                    Worker.current_point[1] = 6
+                print "Worker throw a dice!"
                 dice = randint(1, 3)
                 if dice == 1:
-                    servo1.ChangeDutyCycle(Worker.current_point[0])
+                    servo1.ChangeDutyCycle(Worker.current_point[1])
                 elif dice == 2:
-                    servo2.ChangeDutyCycle(Worker.current_point[0])
+                    servo2.ChangeDutyCycle(Worker.current_point[1])
                 elif dice == 3:
-                    servo3.ChangeDutyCycle(Worker.current_point[0])
+                    servo3.ChangeDutyCycle(Worker.current_point[1])
             if key == "turn_bottom":
                 print key, value
-                Worker.current_point[1] = Worker.current_point[1] - value / float(100)
+                Worker.current_point[1] = Worker.current_point[1] - value / float(1000)
                 if Worker.current_point[1] < 2.5 or Worker.current_point[1] > 12:
-                    Worker.current_point[1] = 2
+                    print "Activate safety mode"
+                    Worker.current_point[1] = 6
+                print "Worker throw a dice!"
                 dice = randint(1, 3)
                 if dice == 1:
-                    servo1.ChangeDutyCycle(Worker.current_point[0])
+                    servo1.ChangeDutyCycle(Worker.current_point[1])
                 elif dice == 2:
-                    servo2.ChangeDutyCycle(Worker.current_point[0])
+                    servo2.ChangeDutyCycle(Worker.current_point[1])
                 elif dice == 3:
-                    servo3.ChangeDutyCycle(Worker.current_point[0])
+                    servo3.ChangeDutyCycle(Worker.current_point[1])
 
         Worker.order = ''
         print "Current point is"
         print Worker.current_point[0], Worker.current_point[1]
-        time.sleep(0.3)
+        time.sleep(0.5)
         print "=====Servo Motor Turn Off.====="
         print "=====Control Servo Process Ended.====="
         print ""
