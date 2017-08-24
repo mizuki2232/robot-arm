@@ -55,8 +55,6 @@ class Worker:
         r = 200.0 / img.shape[1]
         dimension = (200, int(img.shape[0] * r))
         resized_img = cv2.resize(img, dimension, interpolation = cv2.INTER_AREA)
-        # encode_param = [int(cv2.IMWRITE_JPEG_QUALITY),90]
-        # result, img = cv2.imencode('.jpg', resized_img, encode_param)
         body = base64.b64encode(resized_img)
         c.release()
         print ""
