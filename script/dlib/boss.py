@@ -1,11 +1,13 @@
 import base64
 from io import BytesIO
+import json
 from random import randint
 import sys
 
 import boto3
+import cv2
 import dlib
-import json
+import numpy as np
 from skimage import io
 
 
@@ -45,12 +47,10 @@ while True:
         ]
     )
 
-    img_info = message[0].body
-    forward = img_info.rfind('key')
-    backward = img_info.rfind('.jpg')
-    img_name = img_info[forward+6:backward+4]
-    img = BytesIO()
-    s3.Bucket('bento-robot').download_fileobj(img_name, img)
+    img = base64.b64decode(message[0].body)
+    img = np.fromstring(img,dtype=int)
+    r, img = cv2.imencode('.jpg', img)
+    img = BytesIO(img)
     img = io.imread(img)
     detector = dlib.get_frontal_face_detector()
     dets = detector(img, 1)
