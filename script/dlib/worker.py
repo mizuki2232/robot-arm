@@ -72,7 +72,7 @@ class Worker:
                 MessageAttributeNames=[
                     'string',
                 ],
-                WaitTimeSeconds=10,
+                WaitTimeSeconds=3,
                 MaxNumberOfMessages=1
             )
 
