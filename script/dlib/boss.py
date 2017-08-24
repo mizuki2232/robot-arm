@@ -9,7 +9,6 @@ import json
 from skimage import io
 
 
-s3 = boto3.resource('s3')
 sqs = boto3.resource('sqs')
 queue_name = 'robot_arm'
 order = {}
@@ -46,11 +45,7 @@ while True:
     )
 
     img_info = message[0].body
-    forward = img_info.rfind('key')
-    backward = img_info.rfind('.jpg')
-    img_name = img_info[forward+6:backward+4]
-    img = BytesIO()
-    s3.Bucket('bento-robot').download_fileobj(img_name, img)
+    img = BytesIO(img_info)
     img = io.imread(img)
     detector = dlib.get_frontal_face_detector()
     dets = detector(img, 1)

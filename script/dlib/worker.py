@@ -38,6 +38,10 @@ try:
 except:
     order_queue = sqs.create_queue(QueueName='robot_arm_order')
 
+try:
+    image_queue = sqs.get_queue_by_name(QueueName='robot_arm_image')
+except:
+    image_queue = sqs.create_queue(QueueName='robot_arm_image')
 
 class Worker:
     order = ''
