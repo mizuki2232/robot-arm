@@ -1,0 +1,134 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<?xml-stylesheet type='text/xsl' href='image_metadata_stylesheet.xsl'?>
+<dataset>
+<name>imglab dataset</name>
+<comment>Created by imglab tool.</comment>
+<images>
+  <image file='train_data/1152.jpg'>
+    <box top='13' left='57' width='74' height='77'/>
+  </image>
+  <image file='train_data/1289.jpg'>
+    <box top='17' left='70' width='84' height='81'/>
+  </image>
+  <image file='train_data/1342.jpg'>
+    <box top='23' left='7' width='79' height='77'/>
+  </image>
+  <image file='train_data/1564.jpg'>
+    <box top='18' left='55' width='89' height='80'/>
+  </image>
+  <image file='train_data/1598.jpg'>
+    <box top='16' left='72' width='91' height='92'/>
+  </image>
+  <image file='train_data/1776.jpg'>
+    <box top='13' left='65' width='87' height='74'/>
+  </image>
+  <image file='train_data/3081.jpg'>
+    <box top='11' left='49' width='82' height='85'/>
+  </image>
+  <image file='train_data/3121.jpg'>
+    <box top='18' left='60' width='96' height='91'/>
+  </image>
+  <image file='train_data/343.jpg'>
+    <box top='6' left='69' width='82' height='87'/>
+  </image>
+  <image file='train_data/3747.jpg'>
+    <box top='22' left='60' width='78' height='79'/>
+  </image>
+  <image file='train_data/4249.jpg'>
+    <box top='30' left='47' width='86' height='72'/>
+  </image>
+  <image file='train_data/4296.jpg'>
+    <box top='7' left='58' width='94' height='93'/>
+  </image>
+  <image file='train_data/44.jpg'>
+    <box top='22' left='67' width='86' height='72'/>
+  </image>
+  <image file='train_data/4519.jpg'>
+    <box top='9' left='65' width='89' height='88'/>
+  </image>
+  <image file='train_data/4550.jpg'>
+    <box top='9' left='50' width='127' height='95'/>
+  </image>
+  <image file='train_data/4600.jpg'>
+    <box top='11' left='33' width='113' height='91'/>
+  </image>
+  <image file='train_data/4917.jpg'>
+    <box top='10' left='73' width='117' height='111'/>
+  </image>
+  <image file='train_data/4979.jpg'>
+    <box top='8' left='50' width='102' height='87'/>
+  </image>
+  <image file='train_data/5376.jpg'>
+    <box top='18' left='40' width='74' height='76'/>
+  </image>
+  <image file='train_data/5464.jpg'>
+    <box top='3' left='72' width='105' height='109'/>
+  </image>
+  <image file='train_data/5561.jpg'>
+    <box top='-2' left='54' width='91' height='98'/>
+  </image>
+  <image file='train_data/5623.jpg'>
+    <box top='14' left='20' width='126' height='89'/>
+  </image>
+  <image file='train_data/5828.jpg'>
+    <box top='9' left='23' width='118' height='106'/>
+  </image>
+  <image file='train_data/5865.jpg'>
+    <box top='5' left='47' width='135' height='98'/>
+  </image>
+  <image file='train_data/5905.jpg'>
+    <box top='6' left='42' width='106' height='91'/>
+  </image>
+  <image file='train_data/6253.jpg'>
+    <box top='8' left='34' width='98' height='97'/>
+  </image>
+  <image file='train_data/6387.jpg'>
+    <box top='4' left='53' width='96' height='97'/>
+  </image>
+  <image file='train_data/6415.jpg'>
+    <box top='7' left='54' width='102' height='101'/>
+  </image>
+  <image file='train_data/6614.jpg'>
+    <box top='9' left='16' width='91' height='90'/>
+  </image>
+  <image file='train_data/6731.jpg'>
+    <box top='6' left='54' width='98' height='104'/>
+  </image>
+  <image file='train_data/6799.jpg'>
+    <box top='11' left='81' width='105' height='95'/>
+  </image>
+  <image file='train_data/6906.jpg'>
+    <box top='11' left='35' width='99' height='92'/>
+  </image>
+  <image file='train_data/7571.jpg'>
+    <box top='8' left='47' width='92' height='90'/>
+  </image>
+  <image file='train_data/7612.jpg'>
+    <box top='5' left='37' width='97' height='99'/>
+  </image>
+  <image file='train_data/7893.jpg'>
+    <box top='14' left='41' width='122' height='98'/>
+  </image>
+  <image file='train_data/7930.jpg'>
+    <box top='10' left='47' width='99' height='86'/>
+  </image>
+  <image file='train_data/7974.jpg'>
+    <box top='14' left='49' width='91' height='85'/>
+  </image>
+  <image file='train_data/8612.jpg'>
+    <box top='5' left='39' width='111' height='104'/>
+  </image>
+  <image file='train_data/8958.jpg'>
+    <box top='19' left='54' width='89' height='86'/>
+  </image>
+  <image file='train_data/9765.jpg'>
+    <box top='7' left='55' width='107' height='103'/>
+  </image>
+  <image file='train_data/9781.jpg'>
+    <box top='7' left='33' width='96' height='96'/>
+  </image>
+  <image file='train_data/9930.jpg'>
+    <box top='6' left='9' width='106' height='97'/>
+  </image>
+</images>
+</dataset>

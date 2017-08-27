@@ -72,8 +72,8 @@ options.num_threads = 4
 options.be_verbose = True
 
 
-training_xml_path = os.path.join(faces_folder, "training.xml")
-testing_xml_path = os.path.join(faces_folder, "testing.xml")
+training_xml_path = os.path.join(faces_folder, "faceset.xml")
+testing_xml_path = os.path.join(faces_folder, "faceset.xml")
 # This function does the actual training.  It will save the final detector to
 # detector.svm.  The input is an XML file that lists the images in the training
 # dataset and also contains the positions of the face boxes.  To create your

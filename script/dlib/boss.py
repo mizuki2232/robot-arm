@@ -51,7 +51,7 @@ while True:
         r, img = cv2.imencode('.jpg', img)
         img = BytesIO(img)
         img = io.imread(img)
-        detector = dlib.get_frontal_face_detector()
+        detector = dlib.simple_object_detector("./train/detector.svm")
         dets = detector(img, 1)
         print ("Number of faces detected: {}".format(len(dets)))
         if len(dets) > 0:
