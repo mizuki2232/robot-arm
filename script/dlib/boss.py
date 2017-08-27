@@ -85,20 +85,20 @@ while True:
 
             except:
                 print "Processing section failed"
-        else:
-            print "Boss throw a dice!"
-            dice = randint(1, 4)
-            if dice == 1:
-                order = {"turn_left": randint(100, 1000)}
-            elif dice == 2:
-                order = {"turn_right": randint(100, 1000)}
-            elif dice == 3:
-                order = {"turn_top": randint(100, 1000)}
-            elif dice == 4:
-                order = {"turn_bottom": randint(100, 1000)}
-            print order
-            body = json.dumps(order)
-            response = order_queue.send_message(MessageBody=body)
+#        else:
+#            print "Boss throw a dice!"
+#            dice = randint(1, 4)
+#            if dice == 1:
+#                order = {"turn_left": randint(100, 1000)}
+#            elif dice == 2:
+#                order = {"turn_right": randint(100, 1000)}
+#            elif dice == 3:
+#                order = {"turn_top": randint(100, 1000)}
+#            elif dice == 4:
+#                order = {"turn_bottom": randint(100, 1000)}
+#            print order
+#            body = json.dumps(order)
+#            response = order_queue.send_message(MessageBody=body)
 
     except (KeyboardInterrupt, SystemExit):
         raise
