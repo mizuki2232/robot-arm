@@ -45,6 +45,7 @@
 import cv2
 import boto3
 import dlib
+import io
 
 
 bucket_name = "bento-robot"
@@ -56,6 +57,12 @@ r, img = c.read()
 r = 200.0/img.shape[1]
 dimension = (200, int(img.shape[0] * r))
 img = cv2.resize(img, dimension, interpolation=cv2.INTER_AREA)
+encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
+result, img_obj = cv2.imencode('.jpg', img, encode_param)
+c.release()
+
+img_obj = io.BytesIO(img_obj)  # wrap binary image for upload_fileobj
+response = s3.Bucket("bento-robot").upload_fileobj(img_obj, "tune.jpg")
 
 
 # The 1 in the second argument indicates that we should upsample the image
