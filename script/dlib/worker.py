@@ -47,7 +47,7 @@ class Worker:
     current_point = [6, 6]
 
     def upload_image(self):
-        """Upload Image To SQS"""
+        """Publish Image To SQS"""
         print "Take Picture..."
         c = cv2.VideoCapture(0)
         r, img = c.read()
@@ -58,7 +58,7 @@ class Worker:
         body = base64.b64encode(resized_img)
         c.release()
         print ""
-        print "Upload Image To SQS"
+        print "Publish Image To SQS"
         response = image_queue.send_message(MessageBody=body)
 
     def get_order(self):
