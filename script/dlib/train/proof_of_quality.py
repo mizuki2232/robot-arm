@@ -5,6 +5,8 @@ from random import randint
 
 import boto3
 import cv2
+import numpy as np
+from  skimage import io
 
 
 proof_image = "proof.jpg"
@@ -14,10 +16,6 @@ sqs = boto3.resource('sqs')
 queue_name = 'robot_arm'
 order = {}
 
-try:
-    order_queue = sqs.get_queue_by_name(QueueName='robot_arm_order')
-except:
-    order_queue = sqs.create_queue(QueueName='robot_arm_order')
 
 try:
     image_queue = sqs.get_queue_by_name(QueueName='robot_arm_image')
@@ -33,27 +31,22 @@ while True:
             MessageAttributeNames=[
                 'string',
             ],
-            WaitTimeSeconds=3,
+            WaitTimeSeconds=20,
             MaxNumberOfMessages=1
         )
-        response = image_queue.delete_messages(
-            Entries=[
-                {
-                    'Id': '1',
-                    'ReceiptHandle': message[0].receipt_handle
-                },
-            ]
-        )
 
+        # debug point
+        print message[0].body
         img = base64.b64decode(message[0].body)
+        # debug point
+#        print type(img)
         img = np.fromstring(img, dtype=int)
         r, img = cv2.imencode('.jpg', img)
         img = BytesIO(img)
-        img = io.imread(img)
         response = s3.Bucket(bucket_name).upload_fileobj(img, proof_image)
+        print "Uploaded decode image to S3"
 
     except (KeyboardInterrupt, SystemExit):
         raise
-
-    except:
-        print "Back To The Loop Top"
+#     except:
+#         print "Back To The Loop Top"
