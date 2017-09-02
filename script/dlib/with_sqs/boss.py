@@ -1,7 +1,7 @@
 import base64
+from io import BytesIO
 import json
 from random import randint
-from io import BytesIO
 
 import boto3
 import cv2
@@ -10,14 +10,20 @@ import numpy as np
 from skimage import io
 
 
-image_queue = sqs.get_queue_by_name(QueueName='robot_arm_image')
-order_queue = sqs.get_queue_by_name(QueueName='robot_arm_order')
 s3 = boto3.resource('s3')
 sqs = boto3.resource('sqs')
 queue_name = 'robot_arm'
-
 order = {}
 
+try:
+    order_queue = sqs.get_queue_by_name(QueueName='robot_arm_order')
+except:
+    order_queue = sqs.create_queue(QueueName='robot_arm_order')
+
+try:
+    image_queue = sqs.get_queue_by_name(QueueName='robot_arm_image')
+except:
+    image_queue = sqs.create_queue(QueueName='robot_arm_image')
 
 while True:
     try:
@@ -28,7 +34,7 @@ while True:
             MessageAttributeNames=[
                 'string',
             ],
-            WaitTimeSeconds=20,
+            WaitTimeSeconds=3,
             MaxNumberOfMessages=1
         )
         response = image_queue.delete_messages(
@@ -40,12 +46,10 @@ while True:
             ]
         )
 
-        img_info = message[0].body
-        forward = img_info.rfind('key')
-        backward = img_info.rfind('.jpg')
-        img_name = img_info[forward+6:backward+4]
-        img = BytesIO()
-        s3.Bucket('bento-robot').download_fileobj(img_name, img)
+        img = base64.b64decode(message[0].body)
+        img = np.fromstring(img, dtype=int)
+        r, img = cv2.imencode('.jpg', img)
+        img = BytesIO(img)
         img = io.imread(img)
         detector = dlib.simple_object_detector("./train/detector.svm")
         dets = detector(img, 1)

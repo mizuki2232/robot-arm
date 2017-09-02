@@ -29,37 +29,36 @@ servo4 = GPIO.PWM(PIN, 50)
 
 val = [2.5, 3.6875, 4.875, 6.0625, 7.25, 8.4375, 9.625, 10.8125, 12]
 
+bucket_name = "bento-robot"
 capture_image = "capture.jpg"
 sqs = boto3.resource('sqs')
+s3 = boto3.resource('s3')
 
-try:
-    order_queue = sqs.get_queue_by_name(QueueName='robot_arm_order')
-except:
-    order_queue = sqs.create_queue(QueueName='robot_arm_order')
-try:
-    image_queue = sqs.get_queue_by_name(QueueName='robot_arm_image')
-except:
-    image_queue = sqs.create_queue(QueueName='robot_arm_image')
+order_queue = sqs.get_queue_by_name(QueueName='robot_arm_order')
+image_queue = sqs.get_queue_by_name(QueueName='robot_arm_image')
 
 
 class Worker:
+    """Working on Rasbperry Pi3"""
     order = ''
     current_point = [6, 6]
 
     def upload_image(self):
-        """Publish Image To SQS"""
+        """Upload Image To S3"""
         print "Take Picture..."
         c = cv2.VideoCapture(0)
         r, img = c.read()
         print "Image Processing..."
-        r = 200.0 / img.shape[1]
-        dimension = (200, int(img.shape[0] * r))
+        r = 500.0 / img.shape[1]
+        dimension = (500, int(img.shape[0] * r))
         resized_img = cv2.resize(img, dimension, interpolation = cv2.INTER_AREA)
-        body = base64.b64encode(resized_img)
+        encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
+        result, img = cv2.imencode('.jpg', resized_img, encode_param)
         c.release()
         print ""
-        print "Publish Image To SQS"
-        response = image_queue.send_message(MessageBody=body)
+        print "Upload Image To S3"
+        img = io.BytesIO(img)
+        response = s3.Bucket(bucket_name).upload_fileobj(img, capture_image)
 
     def get_order(self):
         """Get Amazon SQS Message"""
