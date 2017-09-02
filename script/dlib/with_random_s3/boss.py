@@ -1,11 +1,11 @@
 import base64
 from io import BytesIO
+import json
 from random import randint
 import sys
 
 import boto3
 import dlib
-import json
 from skimage import io
 
 

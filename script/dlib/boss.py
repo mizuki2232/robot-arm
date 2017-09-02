@@ -10,11 +10,12 @@ import numpy as np
 from skimage import io
 
 
-image_queue = sqs.get_queue_by_name(QueueName='robot_arm_image')
-order_queue = sqs.get_queue_by_name(QueueName='robot_arm_order')
 s3 = boto3.resource('s3')
 sqs = boto3.resource('sqs')
 queue_name = 'robot_arm'
+
+image_queue = sqs.get_queue_by_name(QueueName='robot_arm_image')
+order_queue = sqs.get_queue_by_name(QueueName='robot_arm_order')
 
 order = {}
 
