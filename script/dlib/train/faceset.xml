@@ -4,80 +4,179 @@
 <name>imglab dataset</name>
 <comment>Created by imglab tool.</comment>
 <images>
+  <image file='train_data/1301.jpg'>
+    <box top='6' left='173' width='221' height='240'/>
+  </image>
   <image file='train_data/1849.jpg'>
-    <box top='12' left='73' width='92' height='86'/>
+    <box top='16' left='76' width='82' height='81'/>
+  </image>
+  <image file='train_data/2008.jpg'>
+    <box top='22' left='165' width='253' height='228'/>
+  </image>
+  <image file='train_data/2086.jpg'>
+    <box top='8' left='182' width='215' height='239'/>
+  </image>
+  <image file='train_data/2723.jpg'>
+    <box top='43' left='204' width='185' height='193'/>
   </image>
   <image file='train_data/2751.jpg'>
-    <box top='18' left='68' width='80' height='87'/>
+    <box top='11' left='69' width='82' height='98'/>
+  </image>
+  <image file='train_data/287.jpg'>
+    <box top='17' left='184' width='204' height='215'/>
   </image>
   <image file='train_data/2965.jpg'>
-    <box top='12' left='87' width='75' height='72'/>
+    <box top='0' left='76' width='97' height='89'/>
+  </image>
+  <image file='train_data/2974.jpg'>
+    <box top='3' left='185' width='220' height='236'/>
+  </image>
+  <image file='train_data/3081.jpg'>
+    <box top='8' left='181' width='218' height='237'/>
   </image>
   <image file='train_data/3121.jpg'>
-    <box top='19' left='62' width='89' height='73'/>
+    <box top='12' left='66' width='85' height='84'/>
+  </image>
+  <image file='train_data/3419.jpg'>
+    <box top='20' left='141' width='245' height='235'/>
   </image>
   <image file='train_data/3649.jpg'>
-    <box top='9' left='52' width='102' height='97'/>
+    <box top='17' left='51' width='119' height='88'/>
+  </image>
+  <image file='train_data/3750.jpg'>
+    <box top='-7' left='156' width='255' height='245'/>
   </image>
   <image file='train_data/3871.jpg'>
-    <box top='12' left='56' width='98' height='85'/>
+    <box top='0' left='58' width='91' height='86'/>
+  </image>
+  <image file='train_data/3895.jpg'>
+    <box top='6' left='149' width='270' height='239'/>
   </image>
   <image file='train_data/4124.jpg'>
-    <box top='15' left='63' width='84' height='79'/>
+    <box top='7' left='68' width='100' height='87'/>
+  </image>
+  <image file='train_data/442.jpg'>
+    <box top='24' left='150' width='260' height='225'/>
   </image>
   <image file='train_data/4623.jpg'>
-    <box top='16' left='46' width='87' height='89'/>
+    <box top='-1' left='40' width='107' height='113'/>
+  </image>
+  <image file='train_data/4736.jpg'>
+    <box top='14' left='177' width='230' height='238'/>
+  </image>
+  <image file='train_data/4894.jpg'>
+    <box top='43' left='118' width='236' height='216'/>
   </image>
   <image file='train_data/5042.jpg'>
-    <box top='14' left='53' width='95' height='89'/>
+    <box top='2' left='48' width='100' height='94'/>
   </image>
   <image file='train_data/5211.jpg'>
-    <box top='10' left='76' width='93' height='95'/>
+    <box top='5' left='79' width='88' height='89'/>
   </image>
   <image file='train_data/5847.jpg'>
-    <box top='4' left='55' width='105' height='87'/>
+    <box top='13' left='55' width='95' height='85'/>
+  </image>
+  <image file='train_data/5922.jpg'>
+    <box top='14' left='158' width='249' height='251'/>
   </image>
   <image file='train_data/6152.jpg'>
-    <box top='8' left='51' width='103' height='101'/>
+    <box top='13' left='64' width='109' height='102'/>
   </image>
   <image file='train_data/6209.jpg'>
-    <box top='8' left='51' width='110' height='97'/>
+    <box top='13' left='67' width='95' height='88'/>
   </image>
   <image file='train_data/6310.jpg'>
-    <box top='11' left='52' width='109' height='93'/>
+    <box top='12' left='51' width='118' height='100'/>
   </image>
   <image file='train_data/64.jpg'>
-    <box top='11' left='52' width='100' height='95'/>
+    <box top='-1' left='64' width='100' height='112'/>
+  </image>
+  <image file='train_data/640.jpg'>
+    <box top='22' left='216' width='215' height='230'/>
+  </image>
+  <image file='train_data/655.jpg'>
+    <box top='42' left='192' width='214' height='210'/>
+  </image>
+  <image file='train_data/6757.jpg'>
+    <box top='10' left='187' width='216' height='244'/>
+  </image>
+  <image file='train_data/6759.jpg'>
+    <box top='12' left='170' width='217' height='215'/>
+  </image>
+  <image file='train_data/6840.jpg'>
+    <box top='12' left='170' width='213' height='212'/>
+  </image>
+  <image file='train_data/7089.jpg'>
+    <box top='43' left='201' width='196' height='192'/>
   </image>
   <image file='train_data/7270.jpg'>
-    <box top='8' left='37' width='116' height='98'/>
+    <box top='6' left='53' width='80' height='92'/>
+  </image>
+  <image file='train_data/7328.jpg'>
+    <box top='17' left='196' width='200' height='222'/>
+  </image>
+  <image file='train_data/7341.jpg'>
+    <box top='14' left='158' width='253' height='236'/>
   </image>
   <image file='train_data/7503.jpg'>
-    <box top='10' left='65' width='101' height='97'/>
+    <box top='10' left='65' width='88' height='84'/>
+  </image>
+  <image file='train_data/7531.jpg'>
+    <box top='47' left='145' width='252' height='247'/>
   </image>
   <image file='train_data/7552.jpg'>
-    <box top='3' left='65' width='101' height='104'/>
+    <box top='-10' left='59' width='108' height='104'/>
   </image>
   <image file='train_data/801.jpg'>
-    <box top='5' left='52' width='110' height='97'/>
+    <box top='15' left='58' width='101' height='82'/>
+  </image>
+  <image file='train_data/8011.jpg'>
+    <box top='47' left='142' width='227' height='223'/>
+  </image>
+  <image file='train_data/8023.jpg'>
+    <box top='49' left='162' width='238' height='218'/>
   </image>
   <image file='train_data/8376.jpg'>
-    <box top='7' left='38' width='124' height='95'/>
+    <box top='0' left='41' width='120' height='107'/>
   </image>
   <image file='train_data/8557.jpg'>
-    <box top='7' left='38' width='131' height='104'/>
+    <box top='3' left='43' width='128' height='98'/>
   </image>
   <image file='train_data/8559.jpg'>
-    <box top='20' left='58' width='102' height='71'/>
+    <box top='-9' left='50' width='105' height='111'/>
+  </image>
+  <image file='train_data/8574.jpg'>
+    <box top='18' left='162' width='241' height='229'/>
+  </image>
+  <image file='train_data/8753.jpg'>
+    <box top='17' left='163' width='226' height='238'/>
   </image>
   <image file='train_data/8812.jpg'>
-    <box top='20' left='58' width='109' height='80'/>
+    <box top='-5' left='49' width='115' height='99'/>
+  </image>
+  <image file='train_data/9209.jpg'>
+    <box top='16' left='155' width='257' height='246'/>
+  </image>
+  <image file='train_data/9351.jpg'>
+    <box top='18' left='165' width='237' height='242'/>
+  </image>
+  <image file='train_data/9594.jpg'>
+    <box top='18' left='165' width='201' height='213'/>
+  </image>
+  <image file='train_data/9758.jpg'>
+    <box top='49' left='181' width='215' height='214'/>
   </image>
   <image file='train_data/9789.jpg'>
-    <box top='11' left='70' width='95' height='88'/>
+    <box top='5' left='64' width='99' height='85'/>
   </image>
   <image file='train_data/9829.jpg'>
-    <box top='8' left='54' width='110' height='77'/>
+    <box top='6' left='63' width='89' height='89'/>
+  </image>
+  <image file='train_data/9845.jpg'>
+    <box top='98' left='197' width='235' height='162'/>
+  </image>
+  <image file='train_data/9883.jpg'>
+    <box top='37' left='178' width='214' height='209'/>
   </image>
 </images>
 </dataset>
