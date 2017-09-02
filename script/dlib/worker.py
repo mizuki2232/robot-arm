@@ -72,7 +72,7 @@ class Worker:
                 MessageAttributeNames=[
                     'string',
                 ],
-                WaitTimeSeconds=3,
+                WaitTimeSeconds=20,
                 MaxNumberOfMessages=1
             )
 
@@ -100,8 +100,7 @@ class Worker:
 
         if Worker.order:
             return response
-        else:
-            return False
+        return False
 
     def control_servo(self):
         """Control Servo it subject to Amazon SQS orders"""
@@ -175,5 +174,3 @@ if __name__ == "__main__":
         Worker().upload_image()
         if Worker().get_order():
             Worker().control_servo()
-        else:
-            continue
