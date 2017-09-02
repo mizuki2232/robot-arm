@@ -170,7 +170,8 @@ class Worker:
 
 
 if __name__ == "__main__":
+    worker = Worker()
     while True:
-        Worker().upload_image()
-        if Worker().get_order():
-            Worker().control_servo()
+        worker.upload_image()
+        if worker.get_order():
+            worker.control_servo()
