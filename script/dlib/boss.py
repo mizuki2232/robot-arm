@@ -48,7 +48,7 @@ while True:
         img = BytesIO()
         s3.Bucket('bento-robot').download_fileobj(img_name, img)
         img = io.imread(img)
-        detector = dlib.simple_object_detector("./train/detector.svm")
+        detector = dlib.simple_object_detector("./train/circle_chip_detector.svm")
         dets = detector(img, 1)
         print ("Number of faces detected: {}".format(len(dets)))
         if len(dets) > 0:

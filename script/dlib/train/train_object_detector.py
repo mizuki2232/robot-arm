@@ -66,14 +66,14 @@ options.add_left_right_image_flips = True
 # empirically by checking how well the trained detector works on a test set of
 # images you haven't trained on.  Don't just leave the value set at 5.  Try a
 # few different C values and see what works best for your data.
-options.C = 5
+options.C = 10
 # Tell the code how many CPU cores your computer has for the fastest training.
 options.num_threads = 4
 options.be_verbose = True
 
 
 training_xml_path = os.path.join(faces_folder, "faceset.xml")
-testing_xml_path = os.path.join(faces_folder, "faceset.xml")
+# testing_xml_path = os.path.join(faces_folder, "test.xml")
 # This function does the actual training.  It will save the final detector to
 # detector.svm.  The input is an XML file that lists the images in the training
 # dataset and also contains the positions of the face boxes.  To create your
@@ -95,8 +95,8 @@ print("Training accuracy: {}".format(
 # However, to get an idea if it really worked without overfitting we need to
 # run it on images it wasn't trained on.  The next line does this.  Happily, we
 # see that the object detector works perfectly on the testing images.
-print("Testing accuracy: {}".format(
-    dlib.test_simple_object_detector(testing_xml_path, "detector.svm")))
+# print("Testing accuracy: {}".format(
+#     dlib.test_simple_object_detector(testing_xml_path, "detector.svm")))
 
 
 

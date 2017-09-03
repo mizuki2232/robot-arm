@@ -1,0 +1,24 @@
+<?xml version='1.0' encoding='ISO-8859-1'?>
+<?xml-stylesheet type='text/xsl' href='image_metadata_stylesheet.xsl'?>
+<dataset>
+<name>imglab dataset</name>
+<comment>Created by imglab tool.</comment>
+<images>
+  <image file='train_data/test/test_1013.jpg'>
+  </image>
+  <image file='train_data/test/test_112.jpg'>
+  </image>
+  <image file='train_data/test/test_2824.jpg'>
+  </image>
+  <image file='train_data/test/test_3879.jpg'>
+  </image>
+  <image file='train_data/test/test_4743.jpg'>
+  </image>
+  <image file='train_data/test/test_564.jpg'>
+  </image>
+  <image file='train_data/test/test_9130.jpg'>
+  </image>
+  <image file='train_data/test/test_9543.jpg'>
+  </image>
+</images>
+</dataset>
