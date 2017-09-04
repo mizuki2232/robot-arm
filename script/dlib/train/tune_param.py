@@ -46,33 +46,36 @@ import cv2
 import boto3
 import dlib
 import io
+import sys
 
 
 bucket_name = "bento-robot"
-detector = dlib.simple_object_detector("./detector.svm")
+detector = dlib.simple_object_detector(sys.argv[1])
 s3 = boto3.resource('s3')
 win = dlib.image_window()
 c = cv2.VideoCapture(1)
 r, img = c.read()
-r = 200.0/img.shape[1]
-dimension = (200, int(img.shape[0] * r))
+r = 500.0/img.shape[1]
+dimension = (500, int(img.shape[0] * r))
 img = cv2.resize(img, dimension, interpolation=cv2.INTER_AREA)
-encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
-result, img_obj = cv2.imencode('.jpg', img, encode_param)
+# encode_param = [int(cv2.IMWRITE_JPEG_QUALITY), 90]
+# result, img_obj = cv2.imencode('.jpg', img, encode_param)
 c.release()
 
-img_obj = io.BytesIO(img_obj)  # wrap binary image for upload_fileobj
-response = s3.Bucket("bento-robot").upload_fileobj(img_obj, "tune.jpg")
+# img_obj = io.BytesIO(img_obj)  # wrap binary image for upload_fileobj
+# response = s3.Bucket("bento-robot").upload_fileobj(img_obj, "tune.jpg")
 
 
 # The 1 in the second argument indicates that we should upsample the image
 # 1 time.  This will make everything bigger and allow us to detect more
 # faces.
+win = dlib.image_window()
 dets = detector(img, 1)
-print("Number of faces detected: {}".format(len(dets)))
+print("Number of object detected: {}".format(len(dets)))
 for i, d in enumerate(dets):
     print("Detection {}: Left: {} Top: {} Right: {} Bottom: {}".format(
         i, d.left(), d.top(), d.right(), d.bottom()))
+
 
 win.clear_overlay()
 win.set_image(img)
