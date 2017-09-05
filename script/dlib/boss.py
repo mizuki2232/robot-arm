@@ -20,6 +20,7 @@ order_queue = sqs.get_queue_by_name(QueueName='robot_arm_order')
 order = {}
 
 
+# test comment
 while True:
     try:
         message = image_queue.receive_messages(
@@ -59,9 +60,7 @@ while True:
 
                     obj_center_x = d.left() + d.right() / 2
                     obj_center_y = d.top() + d.bottom() / 2
-                height = img.shape[0]
-                width = img.shape[1]
-                img_center_x = width / 2
+                height = img.shape[0] width = img.shape[1]img_center_x = width / 2
                 img_center_y = height / 2
 
                 x_distance = img_center_x - obj_center_x
