@@ -20,7 +20,6 @@ order_queue = sqs.get_queue_by_name(QueueName='robot_arm_order')
 order = {}
 
 
-# test comment
 while True:
     try:
         message = image_queue.receive_messages(
