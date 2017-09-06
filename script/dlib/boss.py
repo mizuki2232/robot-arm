@@ -21,6 +21,7 @@ order = {}
 
 
 # test comment
+# test comment
 while True:
     try:
         message = image_queue.receive_messages(
