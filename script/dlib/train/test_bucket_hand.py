@@ -4,7 +4,7 @@ import RPi.GPIO as GPIO
 
 GPIO.setmode(GPIO.BCM)
 
-PIN = 23
+PIN = 26
 GPIO.setup(PIN, GPIO.OUT)
 servo1 = GPIO.PWM(PIN, 50)
 
@@ -19,7 +19,7 @@ def control_servo():
     servo1.start(0.0)
     servo1.ChangeDutyCycle(val[0])
     time.sleep(3)
-    servo1.ChangeDutyCycle(val[8])
+    servo1.ChangeDutyCycle(val[4])
     time.sleep(3)
     servo1.ChangeDutyCycle(val[0])
     print "=====Servo Motor Turn Off.====="
