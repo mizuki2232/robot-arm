@@ -1,8 +1,7 @@
-import base64
+import time
 import json
 import io
 from random import randint
-import time
 
 import boto3
 import cv2
@@ -13,19 +12,23 @@ GPIO.setmode(GPIO.BCM)
 
 PIN = 23
 GPIO.setup(PIN, GPIO.OUT)
-servo1 = GPIO.PWM(PIN, 50)
+servo_turn_table = GPIO.PWM(PIN, 50)
 
 PIN = 24
 GPIO.setup(PIN, GPIO.OUT)
-servo2 = GPIO.PWM(PIN, 50)
+servo_second = GPIO.PWM(PIN, 50)
 
 PIN = 25
 GPIO.setup(PIN, GPIO.OUT)
-servo3 = GPIO.PWM(PIN, 50)
+servo_third = GPIO.PWM(PIN, 50)
 
 PIN = 8
 GPIO.setup(PIN, GPIO.OUT)
-servo4 = GPIO.PWM(PIN, 50)
+servo_fourth = GPIO.PWM(PIN, 50)
+
+PIN = 26
+GPIO.setup(PIN, GPIO.OUT)
+servo_bucket = GPIO.PWM(PIN, 50)
 
 val = [2.5, 3.6875, 4.875, 6.0625, 7.25, 8.4375, 9.625, 10.8125, 12]
 
@@ -39,12 +42,12 @@ image_queue = sqs.get_queue_by_name(QueueName='robot_arm_image')
 
 
 class Worker:
-    """Working on Rasbperry Pi3"""
+    """Working on Rasbperry Pi3."""
     order = ''
     current_point = [6, 6]
 
     def upload_image(self):
-        """Upload Image To S3"""
+        """Upload Image To S3."""
         print "Take Picture..."
         c = cv2.VideoCapture(0)
         r, img = c.read()
@@ -61,7 +64,7 @@ class Worker:
         response = s3.Bucket(bucket_name).upload_fileobj(img, capture_image)
 
     def get_order(self):
-        """Get Amazon SQS Message"""
+        """Get Amazon SQS Message."""
         print ""
         try:
             message = order_queue.receive_messages(
@@ -102,14 +105,15 @@ class Worker:
         return False
 
     def control_servo(self):
-        """Control Servo it subject to Amazon SQS orders"""
+        """Control Servo it subject to Amazon SQS orders."""
         print ""
         print "=====Control Servo Process Start.====="
         print ""
-        servo1.start(0.0)
-        servo2.start(0.0)
-        servo3.start(0.0)
-        servo4.start(0.0)
+        servo_turn_table.start(0.0)
+        servo_second.start(0.0)
+        servo_third.start(0.0)
+        servo_fourth.start(0.0)
+        servo_bucket.start(0.0)
 
         order = json.loads(Worker.order)
 
@@ -121,14 +125,14 @@ class Worker:
                 if Worker.current_point[0] < 2.5 or Worker.current_point[0] > 12:
                     print "Activate safety mode"
                     Worker.current_point[0] = 6
-                servo4.ChangeDutyCycle(Worker.current_point[0])
+                servo_turn_table.ChangeDutyCycle(Worker.current_point[0])
             if key == "turn_left":
                 print key, value
                 Worker.current_point[0] = Worker.current_point[0] - value / float(1000)
                 if Worker.current_point[0] < 2.5 or Worker.current_point[0] > 12:
                     print "Activate safety mode"
                     Worker.current_point[0] = 6
-                servo4.ChangeDutyCycle(Worker.current_point[0])
+                servo_turn_table.ChangeDutyCycle(Worker.current_point[0])
             if key == "turn_top":
                 print key, value
                 Worker.current_point[1] = Worker.current_point[1] - value / float(1000)
@@ -138,11 +142,11 @@ class Worker:
                 print "Worker throw a dice!"
                 dice = randint(1, 3)
                 if dice == 1:
-                    servo1.ChangeDutyCycle(Worker.current_point[1])
+                    servo_second.ChangeDutyCycle(Worker.current_point[1])
                 elif dice == 2:
-                    servo2.ChangeDutyCycle(Worker.current_point[1])
+                    servo_third.ChangeDutyCycle(Worker.current_point[1])
                 elif dice == 3:
-                    servo3.ChangeDutyCycle(Worker.current_point[1])
+                    servo_fourth.ChangeDutyCycle(Worker.current_point[1])
             if key == "turn_bottom":
                 print key, value
                 Worker.current_point[1] = Worker.current_point[1] - value / float(1000)
@@ -152,11 +156,24 @@ class Worker:
                 print "Worker throw a dice!"
                 dice = randint(1, 3)
                 if dice == 1:
-                    servo1.ChangeDutyCycle(Worker.current_point[1])
+                    servo_second.ChangeDutyCycle(Worker.current_point[1])
                 elif dice == 2:
-                    servo2.ChangeDutyCycle(Worker.current_point[1])
+                    servo_third.ChangeDutyCycle(Worker.current_point[1])
                 elif dice == 3:
-                    servo3.ChangeDutyCycle(Worker.current_point[1])
+                    servo_fourth.ChangeDutyCycle(Worker.current_point[1])
+
+        print "glab a object"
+        servo_bucket.ChangeDutyCycle(val[3])
+        time.sleep(1)
+        servo_bucket.ChangeDutyCycle(val[0])
+
+        print "bring desired point"
+        time.sleep(1)
+        servo_second.ChangeDutyCycle(val[1])
+        servo_turn_table.ChangeDutyCycle(val[0])
+
+        print "then release a object.Done"
+        servo_bucket.ChangeDutyCycle(val[3])
 
         Worker.order = ''
         print "Current point is"
